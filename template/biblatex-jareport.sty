@@ -1,0 +1,506 @@
+%% biblatex-jareport.sty
+%%
+%% [中文]
+%% 面向日文实验报告的参考文献样式，编排规则参考 SIST 02-2007。
+%% 这是项目自行维护的实现，不是 SIST 的官方样式，也不保证完全符合标准。
+%% 日文条目请在 .bib 中设置 langid = {japanese}；其他条目沿用所选基础样式。
+%% 本文件需与 biblatex-jareport-japanese.lbx 一起使用。
+%%
+%% [日本語]
+%% 日本語の実験レポート向けに，SIST 02-2007 を参考にした参考文献スタイル。
+%% 本プロジェクト独自の実装であり，SIST の公式スタイルや完全準拠を示すものではない。
+%% 日本語文献には .bib で langid = {japanese} を指定し，その他は基礎スタイルを使う。
+%% biblatex-jareport-japanese.lbx と組み合わせて使用すること。
+
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{biblatex-jareport}[2026/08/09 bibliography layer based on SIST 02-2007]
+
+\DeclareOption*{\PassOptionsToPackage{\CurrentOption}{biblatex}}
+\ProcessOptions\relax
+
+\RequirePackage{biblatex}
+
+\DeclareLanguageMapping{japanese}{biblatex-jareport-japanese}
+
+\DeclareFieldFormat{jareporttitle}{#1}
+\DeclareFieldFormat{jareportpages}{#1}
+\DeclareFieldFormat{jareporturl}{\url{#1}}
+\DeclareFieldFormat{jareportisbn}{ISBN\space#1}
+\DeclareFieldFormat{jareportdoi}{doi:\space#1}
+
+\DeclareNameFormat{jareportname}{%
+  \ifnumgreater{\value{listcount}}{\value{liststart}}
+    {\printtext{，}}
+    {}%
+  \ifdefvoid{\namepartgiven}
+    {\mkbibnamefamily{\namepartfamily}}
+    {\mkbibnamefamily{\namepartfamily}%
+     \printtext{,\space}%
+     \mkbibnamegiven{\namepartgiven}}%
+  \ifboolexpr{
+    test {\ifnumequal{\value{listcount}}{\value{liststop}}}
+    and
+    test \ifmorenames
+  }
+    {\printtext{ほか}}
+    {}}
+
+\newbibmacro*{jareport:author}{%
+  \ifnameundef{author}
+    {\ifnameundef{editor}
+       {}
+       {\printnames[jareportname]{editor}\printtext{編}}}
+    {\printnames[jareportname]{author}}}
+
+\newbibmacro*{jareport:editor}{%
+  \ifnameundef{editor}
+    {}
+    {\printnames[jareportname]{editor}\printtext{編}}}
+
+\newbibmacro*{jareport:twodigits}[1]{%
+  \ifnumless{#1}{10}{0}{}#1}
+
+\newbibmacro*{jareport:date}{%
+  \iffieldundef{year}
+    {}
+    {\printtext{%
+       \thefield{year}%
+       \iffieldundef{month}
+         {}
+         {-\usebibmacro{jareport:twodigits}{\thefield{month}}}%
+       \iffieldundef{day}
+         {}
+         {-\usebibmacro{jareport:twodigits}{\thefield{day}}}}}}
+
+\newbibmacro*{jareport:year}{%
+  \iffieldundef{year}
+    {}
+    {\printfield[jareporttitle]{year}}}
+
+\newbibmacro*{jareport:eventdate}{%
+  \iffieldundef{eventyear}
+    {}
+    {\printtext{%
+       \thefield{eventyear}%
+       \iffieldundef{eventmonth}
+         {}
+         {-\usebibmacro{jareport:twodigits}{\thefield{eventmonth}}}%
+       \iffieldundef{eventday}
+         {}
+         {-\usebibmacro{jareport:twodigits}{\thefield{eventday}}}}}}
+
+\newbibmacro*{jareport:urldate}{%
+  \iffieldundef{urlyear}
+    {}
+    {\printtext{%
+       \thefield{urlyear}%
+       \iffieldundef{urlmonth}
+         {}
+         {-\usebibmacro{jareport:twodigits}{\thefield{urlmonth}}}%
+       \iffieldundef{urlday}
+         {}
+         {-\usebibmacro{jareport:twodigits}{\thefield{urlday}}}}}}
+
+\newbibmacro*{jareport:url+urldate}{%
+  \iffieldundef{url}
+    {}
+    {\global\togglefalse{jareport@endswithdot}%
+     \printfield[jareporturl]{url}%
+     \iffieldundef{urlyear}
+       {}
+       {\setunit{\printtext{，}}%
+        \printtext{（参照 \usebibmacro{jareport:urldate}）}}}}
+
+% [中文] 下面这个开关用来实现"文献以 214p. 这类结尾时，句尾不再多加一个．"的规则：
+%        输出总页数时打开；之后如果又输出了别的内容就关闭；每条文献结束时都会归位。
+% [日本語] 以下のスイッチは「214p. などで終わる文献では最後に．を重ねない」という規則のためのもの：
+%          総ページ数を出力したときにオンになり，その後に別の内容が出力されたらオフに戻る。
+%          文献ごとに必ずリセットされる。
+\newtoggle{jareport@endswithdot}
+\newbibmacro*{jareport:finentry}{%
+  {\iftoggle{jareport@endswithdot}
+     {\renewcommand*{\finentrypunct}{}}
+     {\renewcommand*{\finentrypunct}{．}}%
+   \finentry}%
+  \global\togglefalse{jareport@endswithdot}}
+
+\newbibmacro*{jareport:quotedtitle}{%
+  \printtext{“}%
+  \printfield[jareporttitle]{title}%
+  \printtext{”}}
+
+\newbibmacro*{jareport:booktitle}{%
+  \iffieldundef{booktitle}
+    {\iffieldundef{maintitle}
+       {\printfield[jareporttitle]{title}}
+       {\printfield[jareporttitle]{maintitle}}}
+    {\printfield[jareporttitle]{booktitle}}}
+
+\newbibmacro*{jareport:journaltitle}{%
+  \iffieldundef{journaltitle}
+    {}
+    {\printfield[jareporttitle]{journaltitle}}}
+
+\newbibmacro*{jareport:volume+number+pages}{%
+  \iffieldundef{volume}
+    {}
+    {\printtext{vol.\space}\printfield[jareporttitle]{volume}}%
+  \setunit*{\printtext{，}}\newblock
+  \iffieldundef{number}
+    {}
+    {\printtext{no.\space}\printfield[jareporttitle]{number}}%
+  \setunit*{\printtext{，}}\newblock
+  \iffieldundef{pages}
+    {}
+    {\printtext{p.\space}\printfield[jareportpages]{pages}}}
+
+\newbibmacro*{jareport:pages}{%
+  \iffieldundef{pages}
+    {}
+    {\printtext{p.\space}\printfield[jareportpages]{pages}}}
+
+\newbibmacro*{jareport:totalpages}{%
+  \iffieldundef{pagetotal}
+    {\iffieldundef{pages}
+       {}
+       {\printtext{p.\space}\printfield[jareportpages]{pages}}}
+    {\printfield[jareportpages]{pagetotal}\printtext{p.}%
+     \global\toggletrue{jareport@endswithdot}}}
+
+\newbibmacro*{jareport:series}{%
+  \iffieldundef{series}
+    {}
+    {\global\togglefalse{jareport@endswithdot}%
+     \printtext{（}%
+     \printfield[jareporttitle]{series}%
+     \iffieldundef{number}
+       {}
+       {\printtext{，}\printfield[jareporttitle]{number}}%
+     \printtext{）}}}
+
+\newbibmacro*{jareport:doi}{%
+  \iffieldundef{doi}
+    {}
+    {\printfield[jareportdoi]{doi}}}
+
+\newbibmacro*{jareport:publication}{%
+  \iffieldundef{edition}
+    {\setunit*{\printtext{．}}\newblock}
+    {\setunit*{\printtext{．}}\newblock
+     \printfield{edition}%
+     \setunit*{\printtext{，}}\newblock}%
+  \printlist{location}%
+  \setunit*{\printtext{，}}\newblock
+  \printlist{publisher}%
+  \setunit*{\printtext{，}}\newblock
+  \usebibmacro{jareport:year}}
+
+\newbibmacro*{jareport:eventtitle}{%
+  \iffieldundef{booktitle}
+    {\iffieldundef{eventtitle}
+       {\iffieldundef{title}
+          {}
+          {\printfield[jareporttitle]{title}}
+       }
+       {\printfield[jareporttitle]{eventtitle}}}
+    {\usebibmacro{jareport:booktitle}}}
+
+\newbibmacro*{jareport:organization}{%
+  \iflistundef{organization}
+    {\iflistundef{publisher}
+       {}
+       {\printlist{publisher}}}
+    {\printlist{organization}}}
+
+\newbibmacro*{jareport:organization+publisher}{%
+  \iflistundef{organization}
+    {\printlist{publisher}}
+    {\printlist{organization}%
+     \iflistundef{publisher}
+       {}
+       {\iflistsequal{organization}{publisher}
+          {}
+          {\setunit*{\printtext{．}}\newblock
+           \printlist{publisher}}}}}
+
+\newbibmacro*{jareport:institution}{%
+  \iflistundef{institution}
+    {\iflistundef{organization}
+       {}
+       {\printlist{organization}}}
+    {\printlist{institution}}}
+
+\newbibmacro*{jareport:book}{%
+  \usebibmacro{bibindex}%
+  \usebibmacro{begentry}%
+  \usebibmacro{jareport:author}%
+  \setunit*{\printtext{．}}\newblock
+  \printfield[jareporttitle]{title}%
+  \usebibmacro{jareport:publication}%
+  \setunit*{\printtext{，}}\newblock
+  \usebibmacro{jareport:totalpages}%
+  \setunit*{\printtext{，}}\newblock
+  \usebibmacro{jareport:series}%
+  \setunit*{\printtext{，}}\newblock
+  \iffieldundef{isbn}
+    {}
+    {\global\togglefalse{jareport@endswithdot}%
+     \printfield[jareportisbn]{isbn}}%
+  \setunit*{\printtext{．}}\newblock
+  \usebibmacro{jareport:url+urldate}%
+  \usebibmacro{jareport:finentry}}
+
+\newbibmacro*{jareport:article}{%
+  \usebibmacro{bibindex}%
+  \usebibmacro{begentry}%
+  \usebibmacro{jareport:author}%
+  \setunit*{\printtext{．}}\newblock
+  \printfield[jareporttitle]{title}%
+  \setunit*{\printtext{．}}\newblock
+  \usebibmacro{jareport:journaltitle}%
+  \setunit*{\printtext{．}}\newblock
+  \usebibmacro{jareport:year}%
+  \setunit*{\printtext{，}}\newblock
+  \usebibmacro{jareport:volume+number+pages}%
+  \setunit*{\printtext{，}}\newblock
+  \printfield[jareporttitle]{eid}%
+  \setunit*{\printtext{，}}\newblock
+  \usebibmacro{jareport:doi}%
+  \setunit*{\printtext{．}}\newblock
+  \usebibmacro{jareport:url+urldate}%
+  \usebibmacro{jareport:finentry}}
+
+\newbibmacro*{jareport:inbook}{%
+  \usebibmacro{bibindex}%
+  \usebibmacro{begentry}%
+  \usebibmacro{jareport:author}%
+  \setunit*{\printtext{．}}\newblock
+  \usebibmacro{jareport:quotedtitle}%
+  \setunit*{\printtext{．}}\newblock
+  \usebibmacro{jareport:booktitle}%
+  \setunit*{\printtext{．}}\newblock
+  \usebibmacro{jareport:editor}%
+  \usebibmacro{jareport:publication}%
+  \setunit*{\printtext{，}}\newblock
+  \usebibmacro{jareport:pages}%
+  \setunit*{\printtext{，}}\newblock
+  \usebibmacro{jareport:series}%
+  \setunit*{\printtext{，}}\newblock
+  \iffieldundef{isbn}
+    {}
+    {\global\togglefalse{jareport@endswithdot}%
+     \printfield[jareportisbn]{isbn}}%
+  \setunit*{\printtext{．}}\newblock
+  \usebibmacro{jareport:url+urldate}%
+  \usebibmacro{jareport:finentry}}
+
+\newbibmacro*{jareport:inproceedings}{%
+  \usebibmacro{bibindex}%
+  \usebibmacro{begentry}%
+  \usebibmacro{jareport:author}%
+  \setunit*{\printtext{．}}\newblock
+  \usebibmacro{jareport:quotedtitle}%
+  \setunit*{\printtext{．}}\newblock
+  \usebibmacro{jareport:eventtitle}%
+  \setunit*{\printtext{．}}\newblock
+  \usebibmacro{jareport:editor}%
+  \setunit*{\printtext{．}}\newblock
+  \printfield{venue}%
+  \setunit*{\printtext{，}}\newblock
+  \usebibmacro{jareport:eventdate}%
+  \setunit*{\printtext{，}}\newblock
+  \usebibmacro{jareport:organization+publisher}%
+  \setunit*{\printtext{，}}\newblock
+  \usebibmacro{jareport:year}%
+  \setunit*{\printtext{，}}\newblock
+  \usebibmacro{jareport:pages}%
+  \setunit*{\printtext{，}}\newblock
+  \usebibmacro{jareport:series}%
+  \setunit*{\printtext{．}}\newblock
+  \usebibmacro{jareport:url+urldate}%
+  \usebibmacro{jareport:finentry}}
+
+\newbibmacro*{jareport:proceedings}{%
+  \usebibmacro{bibindex}%
+  \usebibmacro{begentry}%
+  \ifnameundef{editor}
+    {\usebibmacro{jareport:author}}
+    {\printnames[jareportname]{editor}\printtext{編}}%
+  \setunit*{\printtext{．}}\newblock
+  \printfield[jareporttitle]{title}%
+  \setunit*{\printtext{．}}\newblock
+  \printfield{venue}%
+  \setunit*{\printtext{，}}\newblock
+  \usebibmacro{jareport:eventdate}%
+  \setunit*{\printtext{，}}\newblock
+  \usebibmacro{jareport:organization+publisher}%
+  \setunit*{\printtext{，}}\newblock
+  \usebibmacro{jareport:year}%
+  \setunit*{\printtext{，}}\newblock
+  \usebibmacro{jareport:totalpages}%
+  \setunit*{\printtext{．}}\newblock
+  \usebibmacro{jareport:url+urldate}%
+  \usebibmacro{jareport:finentry}}
+
+\newbibmacro*{jareport:thesis}{%
+  \usebibmacro{bibindex}%
+  \usebibmacro{begentry}%
+  \usebibmacro{jareport:author}%
+  \setunit*{\printtext{．}}\newblock
+  \printfield[jareporttitle]{title}%
+  \setunit*{\printtext{．}}\newblock
+  \printlist{location}%
+  \setunit*{\printtext{，}}\newblock
+  \usebibmacro{jareport:institution}%
+  \setunit*{\printtext{，}}\newblock
+  \usebibmacro{jareport:year}%
+  \setunit*{\printtext{，}}\newblock
+  \usebibmacro{jareport:totalpages}%
+  \setunit*{\printtext{，}}\newblock
+  \global\togglefalse{jareport@endswithdot}%
+  \iffieldundef{type}
+    {\printtext{学位論文}}
+    {\printfield{type}}%
+  \setunit*{\printtext{．}}\newblock
+  \usebibmacro{jareport:url+urldate}%
+  \usebibmacro{jareport:finentry}}
+
+\newbibmacro*{jareport:report}{%
+  \usebibmacro{bibindex}%
+  \usebibmacro{begentry}%
+  \usebibmacro{jareport:author}%
+  \setunit*{\printtext{．}}\newblock
+  \printfield[jareporttitle]{title}%
+  \setunit*{\printtext{．}}\newblock
+  \printlist{location}%
+  \setunit*{\printtext{，}}\newblock
+  \usebibmacro{jareport:institution}%
+  \setunit*{\printtext{，}}\newblock
+  \usebibmacro{jareport:year}%
+  \setunit*{\printtext{，}}\newblock
+  \iffieldundef{number}
+    {}
+    {\printfield[jareporttitle]{number}}%
+  \setunit*{\printtext{，}}\newblock
+  \usebibmacro{jareport:totalpages}%
+  \setunit*{\printtext{．}}\newblock
+  \usebibmacro{jareport:url+urldate}%
+  \usebibmacro{jareport:finentry}}
+
+\newbibmacro*{jareport:unpublished}{%
+  \usebibmacro{bibindex}%
+  \usebibmacro{begentry}%
+  \usebibmacro{jareport:author}%
+  \setunit*{\printtext{．}}\newblock
+  \printfield[jareporttitle]{title}%
+  \setunit*{\printtext{．}}\newblock
+  \usebibmacro{jareport:journaltitle}%
+  \setunit*{\printtext{．}}\newblock
+  \usebibmacro{jareport:year}%
+  \setunit*{\printtext{，}}\newblock
+  \printfield{note}%
+  \setunit*{\printtext{．}}\newblock
+  \usebibmacro{jareport:url+urldate}%
+  \usebibmacro{jareport:finentry}}
+
+\newbibmacro*{jareport:misc}{%
+  \usebibmacro{bibindex}%
+  \usebibmacro{begentry}%
+  \usebibmacro{jareport:author}%
+  \setunit*{\printtext{．}}\newblock
+  \printfield[jareporttitle]{title}%
+  \setunit*{\printtext{．}}\newblock
+  \printfield{howpublished}%
+  \setunit*{\printtext{，}}\newblock
+  \usebibmacro{jareport:year}%
+  \setunit*{\printtext{，}}\newblock
+  \printfield{note}%
+  \setunit*{\printtext{．}}\newblock
+  \usebibmacro{jareport:url+urldate}%
+  \usebibmacro{jareport:finentry}}
+
+\newbibmacro*{jareport:online}{%
+  \usebibmacro{bibindex}%
+  \usebibmacro{begentry}%
+  \usebibmacro{jareport:author}%
+  \setunit*{\printtext{．}}\newblock
+  \usebibmacro{jareport:quotedtitle}%
+  \setunit*{\printtext{．}}\newblock
+  \usebibmacro{jareport:organization}%
+  \setunit*{\printtext{．}}\newblock
+  \usebibmacro{jareport:date}%
+  \setunit*{\printtext{．}}\newblock
+  \usebibmacro{jareport:url+urldate}%
+  \usebibmacro{jareport:finentry}}
+
+% Preserve the selected base style for entries not marked as Japanese.
+\makeatletter
+\let\blx@bbx@jareport@orig@article\blx@bbx@article
+\let\blx@bbx@jareport@orig@book\blx@bbx@book
+\let\blx@bbx@jareport@orig@inbook\blx@bbx@inbook
+\let\blx@bbx@jareport@orig@incollection\blx@bbx@incollection
+\let\blx@bbx@jareport@orig@inproceedings\blx@bbx@inproceedings
+\let\blx@bbx@jareport@orig@misc\blx@bbx@misc
+\let\blx@bbx@jareport@orig@online\blx@bbx@online
+\let\blx@bbx@jareport@orig@proceedings\blx@bbx@proceedings
+\let\blx@bbx@jareport@orig@report\blx@bbx@report
+\let\blx@bbx@jareport@orig@thesis\blx@bbx@thesis
+\let\blx@bbx@jareport@orig@unpublished\blx@bbx@unpublished
+
+\DeclareBibliographyDriver{article}{%
+  \iffieldequalstr{langid}{japanese}
+    {\usebibmacro{jareport:article}}
+    {\blx@bbx@jareport@orig@article}}
+
+\DeclareBibliographyDriver{book}{%
+  \iffieldequalstr{langid}{japanese}
+    {\usebibmacro{jareport:book}}
+    {\blx@bbx@jareport@orig@book}}
+
+\DeclareBibliographyDriver{inbook}{%
+  \iffieldequalstr{langid}{japanese}
+    {\usebibmacro{jareport:inbook}}
+    {\blx@bbx@jareport@orig@inbook}}
+
+\DeclareBibliographyDriver{incollection}{%
+  \iffieldequalstr{langid}{japanese}
+    {\usebibmacro{jareport:inbook}}
+    {\blx@bbx@jareport@orig@incollection}}
+
+\DeclareBibliographyDriver{inproceedings}{%
+  \iffieldequalstr{langid}{japanese}
+    {\usebibmacro{jareport:inproceedings}}
+    {\blx@bbx@jareport@orig@inproceedings}}
+
+\DeclareBibliographyDriver{misc}{%
+  \iffieldequalstr{langid}{japanese}
+    {\usebibmacro{jareport:misc}}
+    {\blx@bbx@jareport@orig@misc}}
+
+\DeclareBibliographyDriver{online}{%
+  \iffieldequalstr{langid}{japanese}
+    {\usebibmacro{jareport:online}}
+    {\blx@bbx@jareport@orig@online}}
+
+\DeclareBibliographyDriver{proceedings}{%
+  \iffieldequalstr{langid}{japanese}
+    {\usebibmacro{jareport:proceedings}}
+    {\blx@bbx@jareport@orig@proceedings}}
+
+\DeclareBibliographyDriver{report}{%
+  \iffieldequalstr{langid}{japanese}
+    {\usebibmacro{jareport:report}}
+    {\blx@bbx@jareport@orig@report}}
+
+\DeclareBibliographyDriver{thesis}{%
+  \iffieldequalstr{langid}{japanese}
+    {\usebibmacro{jareport:thesis}}
+    {\blx@bbx@jareport@orig@thesis}}
+
+\DeclareBibliographyDriver{unpublished}{%
+  \iffieldequalstr{langid}{japanese}
+    {\usebibmacro{jareport:unpublished}}
+    {\blx@bbx@jareport@orig@unpublished}}
+\makeatother
+
+\endinput

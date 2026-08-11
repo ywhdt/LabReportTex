@@ -1,0 +1,25 @@
+% !TeX program = lualatex
+% TeX Live 2026: enable the new list keys without tagged-PDF output.
+\DocumentMetadata{lang=ja-JP,tagging=off}
+\documentclass{ltjsarticle}
+
+\input{config/preamble}
+\input{config/commands}
+\input{config/metadata}
+
+\addbibresource{bibliography/references.bib}
+\graphicspath{{figures/}}
+
+\begin{document}
+
+\maketitle
+
+\input{sections/01-purpose}
+\input{sections/02-theory}
+\input{sections/03-method}
+\input{sections/04-results}
+\input{sections/05-discussion}
+\input{sections/06-summary}
+\input{sections/07-references}
+
+\end{document}

@@ -1,0 +1,39 @@
+% SAMPLE-ONLY: \SampleGuideNote and \SampleGuideSource are not template commands.
+% [DOC:BIB-CONDITION-01] Print the bibliography only when data was cited.
+\iflabreporthasreferences
+  \SampleGuideSource
+    {オンライン資料を登録する BibLaTeX データ}
+    {bibliography/references.bib}
+    {guide_bib_entry_start}
+    {guide_bib_entry_end}
+
+  % [DOC:BIB-JAPANESE-01] Japanese bibliography selection with langid.
+  \par\smallskip
+  \SampleGuideNote[violet!70!black]{［BIB-JAPANESE-01］}{%
+日本語文献に \texttt{langid=\{japanese\}} を指定すると、
+    \texttt{biblatex-jareport} の日本語書式が選択されます。}
+
+  % [DOC:BIB-DRIVERS-01] Overview of the Japanese entry-type drivers.
+  \SampleGuideNote[violet!70!black]{［BIB-DRIVERS-01］}{%
+以下の一覧には、書籍、論文、分担章、会議論文、会議録、報告書、学位論文、
+    オンライン資料、技術資料、未刊行資料の各形式を含めています。}
+
+  % English entries use the fallback style.
+  \SampleGuideNote[violet!70!black]{英語文献の補足}{%
+英語文献では日本語用の書式を使わず、この例では IEEE 形式で出力されます。}
+
+  % [DOC:BIB-URL-01] URL and access date fields.
+  \SampleGuideNote[violet!70!black]{URL の補足}{%
+\texttt{online} などの文献では、\texttt{url} と \texttt{urldate} から URL と参照日を出力できます。}
+
+  % [DOC:BIB-COMPRESS-01] Numeric citation compression.
+  \SampleGuideNote[violet!70!black]{引用番号の補足}{%
+\texttt{citestyle=numeric-comp} により、連続する複数文献の引用番号は範囲へ圧縮されます。}
+
+  \SampleGuideNote[violet!70!black]{［BIB-CONDITION-01］}{%
+このテンプレートでは、本文で引用した文献がある場合だけ参考文献一覧を表示します。}
+  \smallskip
+
+  % [DOC:BIB-PRINT-01]
+  \printbibliography[title={参考文献}]
+\fi

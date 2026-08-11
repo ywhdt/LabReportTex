@@ -1,0 +1,309 @@
+% SAMPLE-ONLY: \SampleGuideNote and \SampleGuideSource are not template commands.
+\section{実験結果}
+\label{sec:results}
+
+\subsection{周波数応答の測定値}
+\label{subsec:response-data}
+
+各周波数で得られた入力振幅、出力振幅、利得および位相差を
+\cref{tab:frequency-response}に示す。入力振幅は全測定点で
+$1.00\,\mathrm{V}$ に調整した。
+
+% [DOC:TABLE-MULTIROW-01] Frequency bands grouped by multirow.
+% guide_multirow_table_start
+\begin{table}[htbp]
+  \centering
+  \caption{周波数応答の測定結果}
+  \label{tab:frequency-response}
+  \small
+  \setlength{\tabcolsep}{3.5pt}
+  \begin{tabularx}{\linewidth}{
+      >{\centering\arraybackslash}p{0.12\linewidth}
+      >{\centering\arraybackslash}p{0.13\linewidth}
+      >{\centering\arraybackslash}p{0.11\linewidth}
+      >{\centering\arraybackslash}p{0.11\linewidth}
+      >{\centering\arraybackslash}p{0.13\linewidth}
+      >{\centering\arraybackslash}X}
+    \toprule
+    領域 & 周波数 / Hz & 入力 / V & 出力 / V & 利得 / dB & 位相差 / deg \\
+    \midrule
+    \multirow{5}{*}{通過域}
+      & 100  & 1.00 & 1.00 & $0.00$  & $-4$ \\
+      & 200  & 1.00 & 0.99 & $-0.09$ & $-7$ \\
+      & 300  & 1.00 & 0.98 & $-0.17$ & $-11$ \\
+      & 500  & 1.00 & 0.96 & $-0.35$ & $-18$ \\
+      & 700  & 1.00 & 0.92 & $-0.73$ & $-24$ \\
+    \midrule
+    \multirow{6}{*}{遷移域}
+      & 1000 & 1.00 & 0.85 & $-1.41$ & $-33$ \\
+      & 1300 & 1.00 & 0.78 & $-2.20$ & $-40$ \\
+      & 1500 & 1.00 & 0.73 & $-2.78$ & $-44$ \\
+      & 1600 & 1.00 & 0.70 & $-3.10$ & $-46$ \\
+      & 1800 & 1.00 & 0.66 & $-3.61$ & $-49$ \\
+      & 2000 & 1.00 & 0.62 & $-4.15$ & $-52$ \\
+    \midrule
+    \multirow{4}{*}{減衰域}
+      & 3000  & 1.00 & 0.46 & $-6.70$  & $-62$ \\
+      & 5000  & 1.00 & 0.30 & $-10.46$ & $-73$ \\
+      & 7000  & 1.00 & 0.22 & $-13.05$ & $-77$ \\
+      & 10000 & 1.00 & 0.16 & $-15.92$ & $-81$ \\
+    \bottomrule
+  \end{tabularx}
+\end{table}
+% guide_multirow_table_end
+
+\SampleGuideSource
+  {同じ分類を複数行にまとめる表のコード}
+  {sections/04-results.tex}
+  {guide_multirow_table_start}
+  {guide_multirow_table_end}
+
+\SampleGuideNote[orange!80!black]{［TABLE-MULTIROW-01］}{%
+\texttt{multirow} を使うと、「通過域」のような同じ分類名を複数行にまとめて表示できます。
+最初の数字には、まとめたい行数を指定します。}
+
+\SampleGuideNote[orange!80!black]{表の幅に関する補足}{%
+数値列には固定幅の \texttt{p} 列、最後の列には残り幅を使う \texttt{X} 列を組み合わせています。}
+
+100--700 Hz では出力振幅が入力振幅に近く、利得の低下は
+$1\,\mathrm{dB}$ 未満であった。1.30--2.00 kHz では利得と位相差が大きく変化し、
+1.60 kHz で利得 $-3.10\,\mathrm{dB}$、位相差 $-46\,\mathrm{deg}$ を得た。
+5 kHz 以上では出力振幅が明確に小さくなった。
+
+\subsection{遮断周波数付近の繰り返し測定}
+\label{subsec:repeatability}
+
+遮断周波数付近の五つの周波数では、出力振幅を三回ずつ読み取った。
+利得へ換算した結果と標準偏差を\cref{tab:repeatability}に示す。
+
+% [DOC:TABLE-REPEAT-01] Ordinary table without multirow.
+\begin{table}[H]
+  \centering
+  \caption{遮断周波数付近の繰り返し測定}
+  \label{tab:repeatability}
+  \begin{tabular}{rrrrrr}
+    \toprule
+    周波数 / Hz & 1 回目 / dB & 2 回目 / dB & 3 回目 / dB & 平均 / dB & 標準偏差 / dB \\
+    \midrule
+    1300 & $-2.18$ & $-2.22$ & $-2.20$ & $-2.20$ & 0.02 \\
+    1500 & $-2.75$ & $-2.80$ & $-2.79$ & $-2.78$ & 0.03 \\
+    1600 & $-3.08$ & $-3.12$ & $-3.10$ & $-3.10$ & 0.02 \\
+    1800 & $-3.58$ & $-3.63$ & $-3.62$ & $-3.61$ & 0.03 \\
+    2000 & $-4.12$ & $-4.18$ & $-4.15$ & $-4.15$ & 0.03 \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+\SampleGuideNote[orange!80!black]{［TABLE-REPEAT-01］}{%
+単純な数値の比較では標準の \texttt{tabular} も使用できます。ここでは列を右寄せして桁を比較しやすくしています。}
+
+三回の測定値の標準偏差は $0.02$--$0.03\,\mathrm{dB}$ であり、
+同じ条件での短時間の繰り返しに対しては大きなばらつきは見られなかった。
+
+\subsection{単一縦軸の利得特性}
+\label{subsec:single-axis-plot}
+
+まず、利得だけを単一の縦軸で比較した結果を\cref{fig:gain-response}に示す。
+測定値と理論値には同じ CSV ファイルの別々の列を用いた。
+
+% [DOC:PLOT-SINGLE-01] Single-axis PGFPlots figure.
+% [DOC:PLOT-DATAFILE-01] Data read from a CSV file.
+% [DOC:PLOT-STYLE-LEGEND-01] Legend styling included by report axis.
+% Fixed placement keeps each plot next to its annotation.
+% guide_single_plot_start
+\begin{figure}[H]
+  \centering
+  \begin{tikzpicture}
+    \begin{axis}[
+      report axis,
+      width=0.82\linewidth,
+      height=0.52\linewidth,
+      xmode=log,
+      xmin=80,
+      xmax=12000,
+      ymin=-18,
+      ymax=1,
+      xtick={100,1000,10000},
+      xticklabels={$10^2$,$10^3$,$10^4$},
+      ytick={-15,-10,-5,0},
+      xlabel={周波数 / Hz},
+      ylabel={利得 / dB}
+    ]
+      \addplot[report plot,mark=*]
+        table[x=frequency_hz,y=gain_measured,col sep=comma]
+        {data/frequency-response.csv};
+      \addlegendentry{測定値}
+      \addplot[report plot,dashed,mark=none]
+        table[x=frequency_hz,y=gain_theory,col sep=comma]
+        {data/frequency-response.csv};
+      \addlegendentry{理論値}
+    \end{axis}
+  \end{tikzpicture}
+  \caption{利得の周波数特性}
+  \label{fig:gain-response}
+\end{figure}
+% guide_single_plot_end
+
+\SampleGuideSource
+  {CSV から一つのグラフを作るコード}
+  {sections/04-results.tex}
+  {guide_single_plot_start}
+  {guide_single_plot_end}
+
+% [DOC:PLOT-STYLE-AXIS-01] Shared axis and legend style.
+% [DOC:PLOT-STYLE-PLOT-01] Shared series style.
+\SampleGuideNote[orange!80!black]{［PLOT-SINGLE-01］}{%
+一つの \texttt{axis} の中に二つの \texttt{\string\addplot} を書き、
+測定値と理論値を同じグラフで比べています。}
+
+\SampleGuideNote[orange!80!black]{［PLOT-STYLE-AXIS-01］}{%
+\texttt{report axis} は軸線、目盛、グリッド、ラベル、凡例を共通書式にそろえます。}
+
+\SampleGuideNote[orange!80!black]{［PLOT-STYLE-PLOT-01］}{%
+測定系列に \texttt{report plot} を指定すると、線幅とマーカーの大きさを統一できます。}
+
+\SampleGuideNote[orange!80!black]{データ読み込みの補足}{%
+\texttt{\string\addplot table} は CSV の列名を指定して、外部データファイルから座標を読み込みます。}
+
+\SampleGuideNote[orange!80!black]{凡例スタイルの補足}{%
+\texttt{report legend} は、凡例の位置、枠線、文字サイズをまとめてそろえます。}
+
+% [DOC:PLOT-LOG-01] Logarithmic frequency axis.
+\SampleGuideNote[orange!80!black]{対数軸の補足}{%
+周波数軸には \texttt{xmode=log} を指定し、100 Hz、1 kHz、10 kHz を等間隔に表示しています。}
+
+測定値は全周波数範囲で理論曲線に沿って変化した。
+特に遮断周波数付近では、測定点を増やしたことにより曲線の変化を細かく確認できた。
+
+\subsection{利得と位相差の二重縦軸表示}
+\label{subsec:dual-axis-plot}
+
+利得と位相差を同じ周波数軸で比較した結果を\cref{fig:dual-response}に示す。
+
+% [DOC:PLOT-DUAL-01] Two overlaid axes with a right-hand y-axis.
+\begin{figure}[H]
+  \centering
+  \begin{tikzpicture}
+    \begin{axis}[
+      report axis,
+      name=gainaxis,
+      width=0.78\linewidth,
+      height=0.48\linewidth,
+      xmode=log,
+      xmin=80,
+      xmax=12000,
+      ymin=-18,
+      ymax=1,
+      xtick={100,1000,10000},
+      xticklabels={$10^2$,$10^3$,$10^4$},
+      ytick={-15,-10,-5,0},
+      xlabel={周波数 / Hz},
+      ylabel={利得 / dB},
+      legend style={at={(0.03,0.04)},anchor=south west}
+    ]
+      \addplot[report plot,mark=*]
+        table[x=frequency_hz,y=gain_measured,col sep=comma]
+        {data/frequency-response.csv};
+      \addlegendentry{利得（測定）}
+      \addplot[report plot,dashed,mark=none]
+        table[x=frequency_hz,y=gain_theory,col sep=comma]
+        {data/frequency-response.csv};
+      \addlegendentry{利得（理論）}
+      \addplot[black!55,densely dotted,line width=0.8pt,mark=none]
+        coordinates {(1580,-18) (1580,1)};
+    \end{axis}
+    % guide_dual_right_axis_start
+    \begin{axis}[
+      report dual right axis,
+      width=0.78\linewidth,
+      height=0.48\linewidth,
+      xmode=log,
+      xmin=80,
+      xmax=12000,
+      ymin=-90,
+      ymax=0,
+      ytick={-90,-60,-30,0},
+      ylabel={位相差 / deg},
+      legend style={at={(0.97,0.96)},anchor=north east}
+    ]
+      \addplot[blue!60!black,line width=1.2pt,mark=square*,mark size=2.1pt]
+        table[x=frequency_hz,y=phase_measured,col sep=comma]
+        {data/frequency-response.csv};
+      \addlegendentry{位相差（測定）}
+      \addplot[blue!60!black,dashed,line width=1.0pt,mark=none]
+        table[x=frequency_hz,y=phase_theory,col sep=comma]
+        {data/frequency-response.csv};
+      \addlegendentry{位相差（理論）}
+    \end{axis}
+    % guide_dual_right_axis_end
+  \end{tikzpicture}
+  \caption{利得と位相差の周波数特性}
+  \label{fig:dual-response}
+\end{figure}
+
+\SampleGuideSource
+  {右側の縦軸を重ねるコード}
+  {sections/04-results.tex}
+  {guide_dual_right_axis_start}
+  {guide_dual_right_axis_end}
+
+% [DOC:PLOT-STYLE-RIGHT-01] Right-hand axis style.
+\SampleGuideNote[orange!80!black]{［PLOT-DUAL-01］}{%
+同じ \texttt{tikzpicture} に二つの \texttt{axis} を重ねると、
+左側と右側に別の縦軸を持つグラフを作れます。}
+
+\SampleGuideNote[orange!80!black]{［PLOT-STYLE-RIGHT-01］}{%
+右側の軸に \texttt{report dual right axis} を指定すると、左側のグラフに重ねやすい書式になります。}
+
+\SampleGuideNote[orange!80!black]{軸を重ねるときの補足}{%
+二つの軸で幅、高さ、横軸範囲を同じ値にすると、目盛位置が正確に一致します。}
+
+\Crefrange{fig:gain-response}{fig:dual-response}から、利得と位相差のどちらを用いても
+遮断周波数が 1.6 kHz 付近にあることを確認できる。
+
+\subsection{利得残差}
+\label{subsec:residuals}
+
+測定利得から理論利得を引いた残差を\cref{fig:gain-residual}に示す。
+
+% [DOC:PLOT-BASE-01] Base axis style without a legend.
+\begin{figure}[H]
+  \centering
+  \begin{tikzpicture}
+    \begin{axis}[
+      report axis base,
+      width=0.78\linewidth,
+      height=0.42\linewidth,
+      xmode=log,
+      xmin=80,
+      xmax=12000,
+      ymin=-0.20,
+      ymax=0.20,
+      xtick={100,1000,10000},
+      xticklabels={$10^2$,$10^3$,$10^4$},
+      ytick={-0.2,-0.1,0,0.1,0.2},
+      xlabel={周波数 / Hz},
+      ylabel={利得残差 / dB}
+    ]
+      \addplot[report plot,only marks,mark=*]
+        table[x=frequency_hz,y=residual_db,col sep=comma]
+        {data/frequency-response.csv};
+      \addplot[black,dashed,line width=0.7pt,mark=none]
+        coordinates {(80,0) (12000,0)};
+    \end{axis}
+  \end{tikzpicture}
+  \caption{測定利得と理論利得の残差}
+  \label{fig:gain-residual}
+\end{figure}
+
+\SampleGuideNote[orange!80!black]{［PLOT-BASE-01］}{%
+凡例を必要としないグラフでは、軸の基本書式だけを持つ \texttt{report axis base} を直接利用できます。}
+
+残差は $-0.10$--$0.15\,\mathrm{dB}$ の範囲にあり、特定の周波数だけが
+大きく外れる傾向は見られなかった。
+\cref{tab:frequency-response,tab:repeatability,fig:gain-residual}を合わせると、
+測定値のばらつきよりも周波数ごとのわずかな系統差が残っていることが分かる。
+
+% [DOC:REF-MULTI-01] Mixed-type multi-label reference.
+\SampleGuideNote[blue!65!black]{［REF-MULTI-01］}{%
+種類の異なる複数ラベルを一つの \texttt{\string\cref} に指定すると、表と図の名称を自動で分けて表示します。}

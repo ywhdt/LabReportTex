@@ -1,0 +1,29 @@
+.DS_Store
+/dist/
+/.labreporttex-test.*/
+/.labreporttex-example.*/
+
+# LaTeX auxiliary files
+*.aux
+*.bbl
+*.bcf
+*.blg
+*.dvi
+*.fdb_latexmk
+*.fls
+*.lof
+*.log
+*.lol
+*.lot
+*.nav
+*.out
+*.run.xml
+*.snm
+*.synctex.gz
+*.toc
+*.vrb
+*.xdv
+
+# Local template build output; example PDFs will live under examples/compiled/.
+/template/report.pdf
+/template/build/

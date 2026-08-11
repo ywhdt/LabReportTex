@@ -1,0 +1,94 @@
+% !TeX root = ../report.tex
+
+% Core language, layout, and document packages.
+\usepackage[deluxe]{luatexja-preset}
+\usepackage{graphicx}
+\usepackage{geometry,tabularx}
+\usepackage{fancyhdr}
+\usepackage[labelformat=simple]{subcaption}
+\usepackage{multirow}
+\usepackage{booktabs}
+\usepackage{float}
+\usepackage{mathtools,amssymb}
+\usepackage{xcolor}
+\usepackage[sorting=none,bibstyle=ieee,citestyle=numeric-comp]{biblatex-jareport}
+\usepackage[hidelinks]{hyperref}
+\usepackage[sort&compress,nameinlink,noabbrev]{cleveref}
+
+% Optional modules. Uncomment only the features used by a report.
+% \input{config/diagrams}
+% \input{config/listings}
+% \input{config/plots}
+
+% Page layout.
+\geometry{top=25mm,bottom=30mm,left=25mm,right=25mm,footskip=12mm}
+\setlength{\headheight}{30pt}
+\renewcommand\thesubfigure{(\alph{subfigure})}
+
+% Show equation numbers only when referenced. These wrappers preserve the
+% normal cleveref interface, including starred and range commands.
+\mathtoolsset{showonlyrefs=true}
+\makeatletter
+\NewCommandCopy{\labreport@cref}{\cref}
+\NewCommandCopy{\labreport@Cref}{\Cref}
+\NewCommandCopy{\labreport@crefrange}{\crefrange}
+\NewCommandCopy{\labreport@Crefrange}{\Crefrange}
+
+\RenewDocumentCommand{\cref}{s m}{%
+  \noeqref{#2}%
+  \IfBooleanTF{#1}
+    {\labreport@cref*{#2}}
+    {\labreport@cref{#2}}}
+
+\RenewDocumentCommand{\Cref}{s m}{%
+  \noeqref{#2}%
+  \IfBooleanTF{#1}
+    {\labreport@Cref*{#2}}
+    {\labreport@Cref{#2}}}
+
+\RenewDocumentCommand{\crefrange}{s m m}{%
+  \noeqref{#2,#3}%
+  \IfBooleanTF{#1}
+    {\labreport@crefrange*{#2}{#3}}
+    {\labreport@crefrange{#2}{#3}}}
+
+\RenewDocumentCommand{\Crefrange}{s m m}{%
+  \noeqref{#2,#3}%
+  \IfBooleanTF{#1}
+    {\labreport@Crefrange*{#2}{#3}}
+    {\labreport@Crefrange{#2}{#3}}}
+\makeatother
+
+% Do not print an empty bibliography in the clean template.
+\newif\iflabreporthasreferences
+\AtDataInput{\global\labreporthasreferencestrue}
+
+% Japanese cross-reference names and punctuation.
+\crefname{figure}{図}{図}
+\crefname{table}{表}{表}
+\crefname{equation}{式}{式}
+\crefname{section}{節}{節}
+\crefname{subsection}{節}{節}
+\crefname{subfigure}{図}{図}
+\crefname{listing}{リスト}{リスト}
+\crefname{lstlisting}{リスト}{リスト}
+\Crefname{listing}{リスト}{リスト}
+\Crefname{lstlisting}{リスト}{リスト}
+
+\crefformat{figure}{図#2#1#3}
+\crefformat{table}{表#2#1#3}
+\crefformat{equation}{式#2(#1)#3}
+\crefformat{listing}{リスト#2#1#3}
+\crefformat{lstlisting}{リスト#2#1#3}
+
+\crefrangeformat{figure}{図#3#1#4〜#5#2#6}
+\crefrangeformat{subfigure}{図#3#1#4〜#5#2#6}
+\AtBeginDocument{%
+  \renewcommand{\crefrangeconjunction}{〜}%
+  \renewcommand{\crefpairconjunction}{および}%
+  \renewcommand{\crefmiddleconjunction}{、}%
+  \renewcommand{\creflastconjunction}{および}%
+  \renewcommand{\crefpairgroupconjunction}{および}%
+  \renewcommand{\crefmiddlegroupconjunction}{、}%
+  \renewcommand{\creflastgroupconjunction}{および}%
+}

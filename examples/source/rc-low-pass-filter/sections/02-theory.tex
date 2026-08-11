@@ -1,0 +1,232 @@
+% SAMPLE-ONLY: \SampleGuideNote and \SampleGuideSource are not template commands.
+\section{原理}
+\label{sec:theory}
+
+\subsection{複素インピーダンス}
+\label{subsec:impedance}
+
+抵抗とコンデンサから構成される一次 RC 低域通過フィルタを考える。
+入力電圧を $V_{\mathrm{in}}$、コンデンサ両端の出力電圧を
+$V_{\mathrm{out}}$ とする。複素数を用いた回路計算の基本的な整理は
+複数の資料を参照した\cite{jp-book,jp-article,jp-inbook}。
+
+角周波数を $\omega=2\pi f$、虚数単位を $j$ とすると、
+コンデンサのインピーダンスは\cref{eq:capacitor}で表される。
+
+% [DOC:MATH-EQUATION-01] A single numbered equation.
+% guide_equation_start
+\begin{equation}
+  Z_C=\frac{1}{j\omega C}
+  \label{eq:capacitor}
+\end{equation}
+% guide_equation_end
+
+\SampleGuideSource
+  {一つの数式を書くコード}
+  {sections/02-theory.tex}
+  {guide_equation_start}
+  {guide_equation_end}
+
+\SampleGuideNote[blue!65!black]{［MATH-EQUATION-01］}{%
+一つの数式を独立して表示するときは \texttt{equation} を使います。
+後から本文で参照するため、式の中に \texttt{\string\label} も付けています。}
+
+複素周波数 $s$ を用いる場合、$s\in\mathbb{C}$ とし、定常正弦波では
+$s=j\omega$ と置く。本実験で扱う周波数は $f\in\mathbb{R}_{>0}$ である。
+
+% [DOC:MATH-AMSSYMB-01] Blackboard bold symbols from amssymb.
+\SampleGuideNote[blue!65!black]{［MATH-AMSSYMB-01］}{%
+\texttt{amssymb} が提供する \texttt{\string\mathbb} を使い、複素数全体と正の実数全体を表しています。}
+
+\subsection{伝達関数}
+\label{subsec:transfer}
+
+抵抗とコンデンサの直列回路に分圧則を適用する。
+伝達関数を $H(j\omega)\coloneqq V_{\mathrm{out}}/V_{\mathrm{in}}$ と定義すると、
+導出過程は\crefrange{eq:divider}{eq:transfer}となる。
+
+% [DOC:MATH-ALIGN-01] Multi-line aligned derivation.
+% guide_align_start
+\begin{align}
+  V_{\mathrm{out}}
+    &=\frac{Z_C}{R+Z_C}V_{\mathrm{in}}
+      \label{eq:divider}\\
+  H(j\omega)
+    &\coloneqq\frac{V_{\mathrm{out}}}{V_{\mathrm{in}}}
+      \label{eq:definition}\\
+    &=\frac{Z_C}{R+Z_C}
+      \label{eq:substitution}\\
+    &=\frac{1}{1+j\omega RC}.
+      \label{eq:transfer}
+\end{align}
+% guide_align_end
+
+\SampleGuideSource
+  {複数行の式をそろえるコード}
+  {sections/02-theory.tex}
+  {guide_align_start}
+  {guide_align_end}
+
+\SampleGuideNote[blue!65!black]{［MATH-ALIGN-01］}{%
+複数行の式で等号の位置をそろえるときは \texttt{align} を使います。
+\texttt{\&} を置いた位置が縦にそろい、必要な行にはそれぞれラベルを付けられます。}
+
+% [DOC:MATH-COLONEQQ-01] Definition symbol from mathtools.
+\SampleGuideNote[blue!65!black]{数式の補足}{%
+\texttt{\string\coloneqq} は「ここで定義する」ことを明示する \texttt{mathtools} の記号です。}
+
+% [DOC:REF-RANGE-01] Lowercase range reference.
+\SampleGuideNote[blue!65!black]{［REF-RANGE-01］}{%
+連続する式をまとめて示す場合は \texttt{\string\crefrange} を使います。ここでは式の開始番号と終了番号が範囲表示になります。}
+
+\subsection{振幅特性と位相特性}
+\label{subsec:frequency-characteristics}
+
+\Cref{eq:transfer}の絶対値と偏角を求めると、振幅比、利得、位相差は
+\crefrange{eq:magnitude}{eq:phase}で表される。
+
+% [DOC:MATH-FREQUENCY-01] Magnitude, gain, and phase equations.
+\begin{align}
+  \lvert H(j\omega)\rvert
+    &=\frac{1}{\sqrt{1+(\omega RC)^2}}
+      \label{eq:magnitude}\\
+  G
+    &=20\log_{10}\lvert H(j\omega)\rvert
+      \label{eq:gain}\\
+  \phi
+    &=-\tan^{-1}(\omega RC).
+      \label{eq:phase}
+\end{align}
+
+% [DOC:REF-CAPITAL-01] Capitalized reference form.
+\SampleGuideNote[blue!65!black]{［REF-CAPITAL-01］}{%
+文頭から参照を始める場合は \texttt{\string\Cref} を使用できます。}
+
+% [DOC:REF-NAME-01] Automatic Japanese reference names.
+\SampleGuideNote[blue!65!black]{参照の補足}{%
+\texttt{cleveref} はラベルの種類を判定し、式には「式」、図には「図」、表には「表」を自動で付けます。}
+
+低周波数側と高周波数側の概略を比較するため、利得の漸近形を
+\cref{eq:asymptotic-gain}に示す。
+
+% [DOC:MATH-DCASES-01] Mathtools dcases environment.
+\begin{equation}
+  G(f)\simeq
+  \begin{dcases}
+    0, & f\ll f_c,\\
+    -20\log_{10}\!\left(\frac{f}{f_c}\right), & f\gg f_c.
+  \end{dcases}
+  \label{eq:asymptotic-gain}
+\end{equation}
+
+\SampleGuideNote[blue!65!black]{［MATH-DCASES-01］}{%
+条件によって式を分ける例では、\texttt{mathtools} の \texttt{dcases} を使用しています。}
+
+\subsection{遮断周波数と時定数}
+\label{subsec:cutoff}
+
+振幅比が $1/\sqrt{2}$ となる周波数を遮断周波数 $f_c$ とする。
+遮断周波数と時定数 $\tau$ は、\crefrange{eq:cutoff}{eq:tau}で表される。
+
+\begin{align}
+  f_c&=\frac{1}{2\pi RC}
+    \label{eq:cutoff}\\
+  \tau&=RC.
+    \label{eq:tau}
+\end{align}
+
+抵抗の公称値 $1.00\,\mathrm{k}\Omega$、コンデンサの公称値 $0.100\,\mu\mathrm{F}$ を代入すると、予測値は\cref{eq:cutoff-nominal}となる。
+
+\begin{equation}
+  f_{c,\mathrm{nominal}}=1.59\times10^3\,\mathrm{Hz}
+  \label{eq:cutoff-nominal}
+\end{equation}
+
+次の式は計算途中で用いた時定数であり、本文から参照していない。
+
+% [DOC:MATH-SHOWONLYREFS-01] Deliberately unreferenced equation.
+\begin{equation}
+  RC=1.00\times10^{-4}\,\mathrm{s}
+  \label{eq:time-constant-unreferenced}
+\end{equation}
+
+\SampleGuideNote[blue!65!black]{［MATH-SHOWONLYREFS-01］}{%
+\texttt{showonlyrefs} により、本文から参照されない時定数の式には番号が表示されません。}
+
+% [DOC:REF-STAR-01] Unlinked single references.
+\SampleGuideNote[blue!65!black]{リンクなし参照の例}{%
+星付き形式ではリンクを付けずに、\cref*{eq:cutoff}、\Cref*{eq:cutoff}のような参照文字列だけを出力できます。}
+
+% [DOC:REF-RANGE-STAR-01] Unlinked range references.
+\SampleGuideNote[blue!65!black]{リンクなし範囲参照の例}{%
+範囲にも星付き形式があり、\crefrange*{eq:cutoff}{eq:tau}、
+  \Crefrange*{eq:cutoff}{eq:tau}のように使用できます。}
+
+\subsection{波形から求める位相差}
+\label{subsec:phase-measurement}
+
+オシロスコープで観測した二つの波形について、入力波形より出力波形が
+$\Delta t$ だけ遅れたとする。一周期を $T=1/f$ とすれば、位相差は
+\cref{eq:phase-delay}から計算できる。
+
+\begin{equation}
+  \phi=-360\frac{\Delta t}{T}=-360f\Delta t
+  \label{eq:phase-delay}
+\end{equation}
+
+例えば $f=1.60\,\mathrm{kHz}$、$\Delta t=80\,\mathrm{\mu s}$ の場合、
+$\phi\simeq-46\,\mathrm{deg}$ となる。
+
+\subsection{素子公差による予測範囲}
+\label{subsec:tolerance-range}
+
+抵抗とコンデンサがそれぞれ公称値から変化すると、遮断周波数も変化する。
+ここでは抵抗を $0.98$--$1.02\,\mathrm{k}\Omega$、コンデンサを
+$0.095$--$0.105\,\mu\mathrm{F}$ の範囲として、上下限を計算した。
+
+\begin{align}
+  f_{c,\min}
+    &=\frac{1}{2\pi R_{\max}C_{\max}}
+      =1.49\,\mathrm{kHz}
+      \label{eq:cutoff-min}\\
+  f_{c,\max}
+    &=\frac{1}{2\pi R_{\min}C_{\min}}
+      =1.71\,\mathrm{kHz}.
+      \label{eq:cutoff-max}
+\end{align}
+
+\Crefrange{eq:cutoff-min}{eq:cutoff-max}は、素子値だけから予想した遮断周波数の範囲である。
+
+% [DOC:REF-RANGE-CAPITAL-01] Capitalized range reference form.
+\SampleGuideNote[blue!65!black]{［REF-RANGE-CAPITAL-01］}{%
+文頭で範囲参照を使う場合は \texttt{\string\Crefrange} を使用します。}
+
+\subsection{記号と周波数領域}
+\label{subsec:symbols}
+
+% [DOC:LIST-DESCRIPTION-01] Description list for symbols.
+本報告で使用する主な記号を以下にまとめる。
+\begin{description}[leftmargin=8em,labelwidth=6.5em,nosep]
+  \item[$R$] 抵抗値
+  \item[$C$] 静電容量
+  \item[$f$] 入力信号の周波数
+  \item[$\omega$] 角周波数
+  \item[$G$] デシベル表示の利得
+  \item[$\phi$] 入出力間の位相差
+  \item[$f_c$] 遮断周波数
+  \item[$\tau$] 時定数
+\end{description}
+
+\SampleGuideNote[teal!70!black]{［LIST-DESCRIPTION-01］}{%
+用語や記号と説明を対応させる場合は \texttt{description} 環境が使いやすいです。}
+
+% [DOC:LIST-DESCRIPTION-02] A second description list for frequency regions.
+測定結果は次の三領域に分けて整理する。
+\begin{description}[leftmargin=8em,labelwidth=6.5em,itemsep=0.3em]
+  \item[通過域] 利得が $0\,\mathrm{dB}$ に近く、入力信号がほぼ保たれる領域
+  \item[遷移域] 利得と位相差が大きく変化し、遮断周波数を含む領域
+  \item[減衰域] 高周波成分が明確に減衰する領域
+\end{description}
+
+\SampleGuideNote[teal!70!black]{説明リストの補足}{%
+ラベル幅と左余白を別々に指定すると、長さの異なる用語でも説明文の開始位置をそろえられます。}

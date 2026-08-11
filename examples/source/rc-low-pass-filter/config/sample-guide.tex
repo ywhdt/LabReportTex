@@ -1,0 +1,48 @@
+% !TeX root = ../report.tex
+% SAMPLE-ONLY: This file builds the explanatory layer in the annotated example.
+% These commands and styles are not part of the LabReportTex template interface.
+
+% [DOC:COLOR-ANNOTATION-01] Colored notes kept separate from the black report body.
+\NewDocumentCommand{\SampleGuideNote}{O{blue!65!black} m +m}{%
+  \ifshowsampleguide
+    \par\smallskip
+    {\small\color{#1}\noindent
+      \textbf{#2}\quad #3\par}%
+  \fi
+}
+
+\lstdefinestyle{sample guide source}{
+  language={[LaTeX]TeX},
+  basicstyle=\ttfamily\fontsize{7.2}{9}\selectfont,
+  frame=single,
+  framerule=0.5pt,
+  rulecolor=\color{black!35},
+  backgroundcolor=\color{black!3},
+  breaklines=true,
+  columns=fullflexible,
+  numbers=none,
+  keywordstyle=\color{blue!65!black},
+  commentstyle=\color{green!35!black},
+  stringstyle=\color{red!65!black},
+  showstringspaces=false,
+  xleftmargin=0.5em,
+  xrightmargin=0.5em,
+  aboveskip=0.35em,
+  belowskip=0.6em
+}
+
+% [DOC:GUIDE-SOURCE-01] Exact source ranges printed beside their PDF results.
+\NewDocumentCommand{\SampleGuideSource}{O{} m m m m}{%
+  \ifshowsampleguide
+    \par\smallskip
+    {\small\color{black!65}\noindent
+      \textbf{#2}\quad
+      \texttt{\detokenize{#3}}\par}%
+    \lstinputlisting[
+      style=sample guide source,
+      linerange={#4-#5},
+      includerangemarker=false,
+      #1
+    ]{#3}%
+  \fi
+}

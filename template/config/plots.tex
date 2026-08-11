@@ -1,0 +1,81 @@
+% !TeX root = ../report.tex
+% Optional PGFPlots styles for laboratory-report graphs.
+
+\usepackage{pgfplots}
+
+\pgfplotsset{compat=1.18}
+\definecolor{plotLine}{HTML}{4F4F4F}
+\pgfplotsset{
+  report axis base/.style={
+    width=0.78\linewidth,
+    height=0.50\linewidth,
+    scale only axis,
+    axis lines=box,
+    axis background/.style={fill=white},
+    axis line style={black, line width=0.8pt},
+    grid=major,
+    major grid style={draw=black!25, line width=0.25pt},
+    minor tick num=1,
+    tick pos=left,
+    tick align=inside,
+    tick style={black, line width=0.7pt},
+    major tick length=3pt,
+    minor tick length=1.8pt,
+    xticklabel style={
+      font=\small,
+      /pgf/number format/fixed,
+      /pgf/number format/precision=1
+    },
+    yticklabel style={
+      font=\small,
+      /pgf/number format/fixed,
+      /pgf/number format/precision=1
+    },
+    label style={font=\normalsize},
+    xlabel style={yshift=-2mm},
+    ylabel style={yshift=1mm}
+  },
+  report legend/.style={
+    legend pos=north west,
+    legend cell align=left,
+    legend style={
+      font=\footnotesize,
+      draw=black,
+      fill=white,
+      line width=0.4pt,
+      inner xsep=3pt,
+      inner ysep=2pt,
+      row sep=1pt
+    },
+    legend image code/.code={
+      \draw[mark repeat=2, mark phase=2, ##1]
+        plot coordinates {(0cm,0cm) (0.25cm,0cm) (0.5cm,0cm)};
+    }
+  },
+  report axis/.style={
+    report axis base,
+    report legend
+  },
+  report plot/.style={
+    plotLine,
+    line width=1.2pt,
+    mark size=2.1pt,
+    mark options={solid, fill=plotLine, draw=plotLine}
+  },
+  report dual right axis/.style={
+    report axis base,
+    axis y line*=right,
+    axis x line=none,
+    axis background/.style={fill=none},
+    grid=none,
+    tick pos=right,
+    ytick pos=right,
+    yticklabel pos=right,
+    ylabel style={
+      at={(axis description cs:1.14,0.5)},
+      % PGFPlots already rotates y labels by 90 degrees; flip the right label.
+      rotate=180,
+      anchor=north
+    }
+  }
+}

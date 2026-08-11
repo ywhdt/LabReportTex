@@ -1,0 +1,14 @@
+% !TeX root = ../report.tex
+% Optional TikZ, logic-circuit, and framed-content support.
+
+\usepackage{tikz}
+\usetikzlibrary{positioning,calc,arrows.meta,circuits.logic.US}
+\usepackage{circuitikz}
+\usepackage[framemethod=tikz]{mdframed}
+
+% TeX Live 2026 replaces \item at begin-document time. mdframed still starts
+% an internal legacy trivlist, so keep its matching legacy \item locally.
+\makeatletter
+\let\labreport@legacyitem\item
+\pretocmd{\mdf@trivlist}{\let\item\labreport@legacyitem}{}{}
+\makeatother

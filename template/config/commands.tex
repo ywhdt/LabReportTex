@@ -1,0 +1,65 @@
+% !TeX root = ../report.tex
+
+\makeatletter
+
+\newcommand{\course}[1]{\def\@course{#1}}
+\newcommand{\group}[1]{\def\@group{#1}}
+\newcommand{\theme}[1]{\def\@theme{#1}}
+\newcommand{\studentid}[1]{\def\@studentid{#1}}
+\newcommand{\experimentpartner}[1]{\def\@experimentpartner{#1}}
+\newcommand{\staff}[1]{\def\@staff{#1}}
+\newcommand{\experimentdate}[1]{\def\@experimentdate{#1}}
+\newcommand{\place}[1]{\def\@place{#1}}
+\newcommand{\experimenttime}[1]{\def\@experimenttime{#1}}
+\newcommand{\reportfirstdue}[1]{\def\@reportfirstdue{#1}}
+
+\providecommand{\@course}{}
+\providecommand{\@group}{}
+\providecommand{\@theme}{}
+\providecommand{\@studentid}{}
+\providecommand{\@experimentpartner}{}
+\providecommand{\@staff}{}
+\providecommand{\@experimentdate}{}
+\providecommand{\@place}{}
+\providecommand{\@experimenttime}{}
+\providecommand{\@reportfirstdue}{}
+
+\renewcommand{\maketitle}{%
+  \begin{center}
+    {\Large \bfseries レポートの基本情報\par}
+    \vspace{1em}
+    \begin{tabularx}{0.95\linewidth}{@{}>{\raggedright\arraybackslash}p{0.25\linewidth}
+                                    >{\centering\arraybackslash}m{1em}
+                                    >{\raggedright\arraybackslash}X@{}}
+      \hline
+      実験テーマ名 & ： & \@title \\
+      レポート執筆者 & ： & \@author \\
+      共同実験者 & ： & \@experimentpartner \\
+      担当教員やTA名 & ： & \@staff \\
+      実験実施日 & ： & \@experimentdate \\
+      実施場所 & ： & \@place \\
+      時間 & ： & \@experimenttime \\
+      初回提出日 & ： & \@reportfirstdue \\
+      \hline
+    \end{tabularx}
+  \end{center}
+}
+
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[C]{%
+  \small
+  \begingroup
+  \renewcommand{\arraystretch}{0.95}%
+  \begin{tabularx}{\textwidth}{@{}
+      >{\raggedright\arraybackslash}m{0.26\textwidth}
+      >{\centering\arraybackslash}m{0.10\textwidth}
+      >{\centering\arraybackslash}m{0.19\textwidth}
+      >{\centering\arraybackslash}m{0.08\textwidth}
+      >{\raggedleft\arraybackslash}X@{}}
+    \@course & テーマ\ \@theme & 学籍番号：\@studentid & \@group 班 & 作成者：\@author
+  \end{tabularx}%
+  \endgroup
+}
+\fancyfoot[C]{\thepage}
+\makeatother

@@ -1,0 +1,98 @@
+% !TeX program = lualatex
+% Compile from this directory with:
+%   latexmk -lualatex report.tex
+% [DOC:DOCMETA-01] LaTeX 2026 document metadata and list-key activation.
+\DocumentMetadata{lang=ja-JP,tagging=off}
+\documentclass{ltjsarticle}
+
+% guide_modules_start
+% [DOC:MODULE-CORE-01] Core template configuration.
+\input{../../../template/config/preamble}
+% [DOC:MODULE-DIAGRAMS-01] Optional diagram module.
+\input{../../../template/config/diagrams}
+% [DOC:MODULE-LISTINGS-01] Optional source-code module.
+\input{../../../template/config/listings}
+% [DOC:MODULE-PLOTS-01] Optional PGFPlots module.
+\input{../../../template/config/plots}
+% [DOC:MODULE-COMMANDS-01] Public report metadata commands.
+\input{../../../template/config/commands}
+% guide_modules_end
+
+% [DOC:GUIDE-TOGGLE-01]
+% SAMPLE-ONLY: Set this false to compile only the black experiment report.
+\newif\ifshowsampleguide
+\showsampleguidetrue
+\input{config/sample-guide}
+\input{config/metadata}
+
+% [DOC:BIB-RESOURCE-01] Bibliography database used by this example.
+\addbibresource{bibliography/references.bib}
+% [DOC:GRAPHICSPATH-01] Search external image assets under figures/.
+\graphicspath{{figures/}}
+
+\begin{document}
+
+\input{sections/00-sample-notice}
+
+% [DOC:TITLEBLOCK-01] Template-specific title information table.
+\maketitle
+
+% [DOC:META-TITLE-AUTHOR-01] Visible title/author and PDF metadata result.
+\SampleGuideNote[purple!70!black]{この PDF の読み方}{%
+  黒い文章だけを読むと、一つの実験レポートになります。色付きの文章では使い方を短く説明し、
+  灰色の枠には実際に使ったソースを示します。詳しい仕組みを確認したい場合は、
+  プロジェクトの説明文書とサンプルソースをご覧ください。}
+
+\SampleGuideNote[purple!70!black]{［META-TITLE-AUTHOR-01］}{%
+  レポート名と作成者は \texttt{config/metadata.tex} で変更します。
+  ここに書いた内容は基本情報表に表示され、PDF のタイトルと作成者にも保存されます。}
+
+\SampleGuideSource
+  {レポート情報を入力している部分}
+  {config/metadata.tex}
+  {guide_metadata_start}
+  {guide_metadata_end}
+
+\SampleGuideNote[purple!70!black]{灰色のソース欄について}{%
+  灰色の枠は、このサンプル PDF だけで使う説明機能です。空のテンプレートには含まれていません。
+  枠内のコードは、上の基本情報表を実際に作るときに読み込まれたものです。}
+
+% [DOC:META-HEADER-01] Metadata fields displayed in the running header.
+% [DOC:META-TABLE-01] Metadata fields displayed by maketitle.
+\SampleGuideNote[purple!70!black]{基本情報の表示場所}{%
+  科目名、テーマ番号、学籍番号、班は各ページの上部にも表示されます。
+  共同実験者、担当者、実施日時、場所、提出日は、最初の基本情報表で確認できます。}
+
+% [DOC:LAYOUT-HEADER-01] fancyhdr page style.
+% [DOC:LAYOUT-PAGE-01] geometry page layout.
+\SampleGuideNote[purple!70!black]{ページ上部と余白}{%
+  ページ上部の情報と下部中央のページ番号は、テンプレートが自動で配置します。
+  余白も全ページで同じ設定になるため、通常は各章で個別に調整する必要はありません。}
+
+% [DOC:CORE-JAPANESE-01] Japanese, Latin, numeric, and math composition.
+\SampleGuideNote[purple!70!black]{日本語と文書設定}{%
+  このテンプレートは LuaLaTeX で日本語を組版します。
+  文書の最初にある \texttt{\string\DocumentMetadata} は、PDF の言語を日本語に設定し、
+  この例で使う新しいリスト設定も有効にします。}
+
+% [DOC:MODULES-01] Optional module entry points.
+\SampleGuideSource
+  {テンプレート設定を読み込んでいる部分}
+  {report.tex}
+  {guide_modules_start}
+  {guide_modules_end}
+
+\SampleGuideNote[purple!70!black]{設定ファイルの読み込み}{%
+  基本設定とレポート情報用の命令は常に読み込みます。
+  このサンプルでは、回路図、コード、グラフも使うため、三つの追加設定を読み込んでいます。
+  \texttt{config/sample-guide.tex} だけは説明表示専用で、テンプレート本体の機能ではありません。}
+
+\input{sections/01-purpose}
+\input{sections/02-theory}
+\input{sections/03-method}
+\input{sections/04-results}
+\input{sections/05-discussion}
+\input{sections/06-summary}
+\input{sections/07-references}
+
+\end{document}

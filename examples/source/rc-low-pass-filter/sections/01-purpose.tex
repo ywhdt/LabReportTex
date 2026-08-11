@@ -1,0 +1,89 @@
+% SAMPLE-ONLY: \SampleGuideNote and \SampleGuideSource are not template commands.
+\section{目的}
+\label{sec:purpose}
+
+\subsection{実験の背景}
+\label{subsec:background}
+
+温度センサの出力を記録する予備観察では、ゆっくり変化する信号に加えて、
+数 kHz 付近の細かな振動が重なって表示された。
+この振動が記録値の読み取りを不安定にするため、測定信号から高い周波数成分を
+減衰させる前処理回路が必要になった。
+
+抵抗とコンデンサで構成される一次 RC 低域通過フィルタは、
+少ない素子で構成でき、遮断周波数を素子値から直接予測できる。
+そこで本実験では、RC 低域通過フィルタを実際に構成し、入力周波数を変化させたときの
+出力振幅と位相差を測定することにした。
+
+低い周波数では出力が入力にほぼ追従し、遮断周波数付近では利得が
+$-3\,\mathrm{dB}$、位相差が $-45\,\mathrm{deg}$ 付近になると予想した。
+さらに高い周波数では、周波数が 10 倍になるごとに利得がおよそ
+$20\,\mathrm{dB}$ 低下し、位相差は $-90\,\mathrm{deg}$ に近づくと考えた。
+
+% [DOC:STRUCT-SECTION-01] Section and subsection hierarchy.
+\SampleGuideNote[purple!70!black]{見出し構造の補足}{%
+本文は \texttt{\string\section} と \texttt{\string\subsection} で段階的に分け、
+  各見出しに \texttt{\string\label} を付けています。}
+
+\subsection{到達目標}
+\label{subsec:objectives}
+
+本実験の到達目標を以下に示す。
+
+% [DOC:LIST-ITEMIZE-01] Itemized experimental objectives.
+% guide_itemize_start
+\begin{itemize}[leftmargin=2.8em,nosep]
+  \item RC 低域通過フィルタの振幅特性と位相特性を測定する。
+  \item 測定した素子値から遮断周波数を予測する。
+  \item 利得、位相差および曲線近似から遮断周波数を推定する。
+  \item 理論値と測定値の差を整理し、主な誤差要因を検討する。
+\end{itemize}
+% guide_itemize_end
+
+\SampleGuideSource
+  {目標を箇条書きにするコード}
+  {sections/01-purpose.tex}
+  {guide_itemize_start}
+  {guide_itemize_end}
+
+\SampleGuideNote[teal!70!black]{［LIST-ITEMIZE-01］}{%
+順番を付けずに項目を並べるときは、\texttt{itemize} を使います。
+各項目は \texttt{\string\item} から書き始めます。}
+
+% [DOC:LIST-KEY-LEFTMARGIN-01] New list key for the left margin.
+\SampleGuideNote[teal!70!black]{左余白の補足}{%
+\texttt{leftmargin=2.8em} で、リスト全体の左側の空きを調整しています。}
+
+% [DOC:LIST-KEY-NOSEP-01] New list key for compact spacing.
+\SampleGuideNote[teal!70!black]{項目間隔の補足}{%
+\texttt{nosep} を付けると、項目どうしの間隔を小さくできます。}
+
+\subsection{確認する量}
+\label{subsec:observables}
+
+実験中に直接読み取る量と、測定後に計算する量を区別した。
+直接読み取る量は入力振幅、出力振幅、二つの波形の時間差である。
+これらを用いて、次の量を比較する。
+
+% [DOC:LIST-ITEMIZE-02] A second itemize example with more spacing.
+\begin{itemize}[leftmargin=3.2em,itemsep=0.35em]
+  \item 振幅比 $V_{\mathrm{out}}/V_{\mathrm{in}}$
+  \item デシベル表示の利得 $G$
+  \item 入出力間の位相差 $\phi$
+  \item 利得残差 $G_{\mathrm{measured}}-G_{\mathrm{theory}}$
+  \item 三回の繰り返し測定から求める標準偏差
+\end{itemize}
+
+\SampleGuideNote[teal!70!black]{同じリストを使い分ける例}{%
+同じ \texttt{itemize} でも、\texttt{itemsep} を指定すると各項目の間隔を広げられます。}
+
+以上の量を用いて、通過域、遷移域、減衰域の特徴を順に確認する。
+理論式は\cref{sec:theory}、装置と手順は\cref{sec:method}、測定値は
+\cref{sec:results}、測定値の解釈は\cref{sec:discussion}に示す。
+
+% [DOC:REF-SECTION-01] Section references with cleveref.
+\SampleGuideNote[blue!65!black]{［REF-SECTION-01］}{%
+節のラベルを \texttt{\string\cref} に渡すと、「節」を含む参照を自動で出力できます。}
+
+\SampleGuideNote[blue!65!black]{複数の節を参照する場合}{%
+複数の節を個別に参照しても、リンク先は各 \texttt{\string\label} に対応します。}
