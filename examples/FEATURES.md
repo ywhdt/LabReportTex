@@ -29,7 +29,7 @@
 | `MODULE-COMMANDS-01` | 报告信息命令入口 / レポート情報命令の入口 | [report.tex](source/rc-low-pass-filter/report.tex) | 2 |
 | `MODULES-01` | 三个可选模块的集中启用方式 / 3 つのオプションモジュールをまとめて有効にする方法 | [report.tex](source/rc-low-pass-filter/report.tex) | 1–2 |
 | `GUIDE-TOGGLE-01` | 显示或隐藏示例说明层 / サンプル説明の表示切替 | [report.tex](source/rc-low-pass-filter/report.tex) | 1 |
-| `GUIDE-SOURCE-01` | PDF 中显示实际源码片段 / PDF に実際のソースを表示 | [sample-guide.tex](source/rc-low-pass-filter/config/sample-guide.tex) | 1–4, 6, 8–10, 13–14, 16, 19–20 |
+| `GUIDE-SOURCE-01` | PDF 中显示实际源码片段 / PDF に実際のソースを表示 | [sample-guide.tex](source/rc-low-pass-filter/config/sample-guide.tex) | 1–4, 6, 8–11, 13–14, 16, 19–20 |
 | `TITLEBLOCK-01` | 自定义 `\maketitle` 信息表 / 独自の基本情報表 | [report.tex](source/rc-low-pass-filter/report.tex) | 1 |
 | `META-TITLE-01` | `\title`：报告标题与 PDF 标题 / レポート名と PDF タイトル | [metadata.tex](source/rc-low-pass-filter/config/metadata.tex) | 1 |
 | `META-AUTHOR-01` | `\author`：作者与 PDF 作者 / 作成者と PDF 作者 | [metadata.tex](source/rc-low-pass-filter/config/metadata.tex) | 1 |
@@ -101,7 +101,7 @@
 | `TABLE-BOOKTABS-01` | `\toprule`、`\midrule`、`\bottomrule` | [03-method.tex](source/rc-low-pass-filter/sections/03-method.tex) | 7 |
 | `TABLE-MULTIROW-01` | `multirow` 跨行频段分组 / 周波数領域の複数行グループ | [04-results.tex](source/rc-low-pass-filter/sections/04-results.tex) | 11 |
 | `TABLE-REPEAT-01` | 标准 `tabular` 的数值比较 / 通常の数値表 | [04-results.tex](source/rc-low-pass-filter/sections/04-results.tex) | 12 |
-| `FLOAT-H-01` | `float` 的 `[H]` 固定位置 / 現在位置への固定配置 | [03-method.tex](source/rc-low-pass-filter/sections/03-method.tex), [04-results.tex](source/rc-low-pass-filter/sections/04-results.tex) | 7–9, 13–15 |
+| `FLOAT-H-01` | `float` 的 `[H]` 固定位置 / 現在位置への固定配置 | [03-method.tex](source/rc-low-pass-filter/sections/03-method.tex), [04-results.tex](source/rc-low-pass-filter/sections/04-results.tex), [05-discussion.tex](source/rc-low-pass-filter/sections/05-discussion.tex) | 7–9, 11–15, 17 |
 | `DIAG-CIRCUIT-01` | CircuitikZ 的 RC 回路 / CircuitikZ による RC 回路 | [03-method.tex](source/rc-low-pass-filter/sections/03-method.tex) | 8 |
 | `DIAG-APPARATUS-01` | TikZ 装置连接图 / TikZ の測定装置接続図 | [03-method.tex](source/rc-low-pass-filter/sections/03-method.tex) | 8 |
 | `DIAG-TIKZ-01` | `positioning` 与 `arrows.meta` / 相対配置と矢印 | [03-method.tex](source/rc-low-pass-filter/sections/03-method.tex) | 8 |

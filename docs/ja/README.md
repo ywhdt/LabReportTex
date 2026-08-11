@@ -24,7 +24,7 @@
 9. [数式と相互参照](09-math-and-cross-references.md)
 10. [参考文献](10-bibliography.md)
 
-## 中国語・日本語、サンプル、拡張
+## 組版、サンプル、カスタマイズ
 
 11. [日本語組版とフォント](11-languages-and-fonts.md)
 12. [ソース、説明、PDF の対応](12-source-doc-pdf-cross-reference.md)

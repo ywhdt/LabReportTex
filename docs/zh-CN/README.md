@@ -24,7 +24,7 @@
 9. [公式与交叉引用](09-math-and-cross-references.md)
 10. [参考文献](10-bibliography.md)
 
-## 双语、示例与扩展
+## 排版、示例与修改
 
 11. [日文排版与字体](11-languages-and-fonts.md)
 12. [源码、说明与 PDF 对照](12-source-doc-pdf-cross-reference.md)

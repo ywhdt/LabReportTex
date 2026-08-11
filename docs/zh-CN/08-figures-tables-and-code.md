@@ -35,7 +35,7 @@
 
 ### 浮动位置与子图
 
-普通情况下优先使用 `[htbp]`，让 LaTeX 在当前位置、页顶、页底或浮动页中选择合适位置。模板加载的 `float` 还提供 `[H]`，用于确实需要固定在当前位置的图表；大量使用 `[H]` 可能留下较大的页尾空白，因此应在 PDF 中检查分页。该行为对应 [`FLOAT-H-01`](../../examples/FEATURES.md)，源码见[示例 03-method.tex](../../examples/source/rc-low-pass-filter/sections/03-method.tex)与[04-results.tex](../../examples/source/rc-low-pass-filter/sections/04-results.tex)，效果分布在 PDF 第 7–9、13–15 页。
+普通情况下优先使用 `[htbp]`，让 LaTeX 在当前位置、页顶、页底或浮动页中选择合适位置。模板加载的 `float` 还提供 `[H]`，用于确实需要固定在当前位置的图表；大量使用 `[H]` 可能留下较大的页尾空白，因此应在 PDF 中检查分页。该行为对应 [`FLOAT-H-01`](../../examples/FEATURES.md)，源码见[示例 03-method.tex](../../examples/source/rc-low-pass-filter/sections/03-method.tex)、[04-results.tex](../../examples/source/rc-low-pass-filter/sections/04-results.tex)与[05-discussion.tex](../../examples/source/rc-low-pass-filter/sections/05-discussion.tex)，效果分布在 PDF 第 7–9、11–15、17 页。
 
 需要把两张图并排并分别编号时，可以使用已经加载的 `subcaption`：
 
@@ -245,7 +245,7 @@ PGFPlots 的轴选项很多，本项目只把上面五个样式作为模板公�
 | 功能 | 稳定 ID | 源码 | PDF 页 |
 | --- | --- | --- | --- |
 | 外部图片、图片目录 | `GRAPHICSPATH-01`、`FIG-IMAGE-01` | [report.tex](../../examples/source/rc-low-pass-filter/report.tex)、[03-method.tex](../../examples/source/rc-low-pass-filter/sections/03-method.tex) | 9 |
-| 子图与浮动位置 | `FIG-SUBFIGURE-01`、`FLOAT-H-01` | [03-method.tex](../../examples/source/rc-low-pass-filter/sections/03-method.tex)、[04-results.tex](../../examples/source/rc-low-pass-filter/sections/04-results.tex) | 8–9、13–15 |
+| 子图与浮动位置 | `FIG-SUBFIGURE-01`、`FLOAT-H-01` | [03-method.tex](../../examples/source/rc-low-pass-filter/sections/03-method.tex)、[04-results.tex](../../examples/source/rc-low-pass-filter/sections/04-results.tex)、[05-discussion.tex](../../examples/source/rc-low-pass-filter/sections/05-discussion.tex) | 7–9、11–15、17 |
 | 表格 | `TABLE-TABULARX-01`、`TABLE-PCOLUMN-01`、`TABLE-BOOKTABS-01`、`TABLE-MULTIROW-01`、`TABLE-REPEAT-01` | [03-method.tex](../../examples/source/rc-low-pass-filter/sections/03-method.tex)、[04-results.tex](../../examples/source/rc-low-pass-filter/sections/04-results.tex) | 6–7、11–12 |
 | 回路与装置图 | `DIAG-CIRCUIT-01`、`DIAG-APPARATUS-01`、`DIAG-TIKZ-01`、`DIAG-CALC-01`、`DIAG-FRAME-01`、`DIAG-LOGIC-01` | [03-method.tex](../../examples/source/rc-low-pass-filter/sections/03-method.tex) | 8 |
 | 代码清单 | `CODE-INLINE-01`、`CODE-BLOCK-01`、`CODE-HIGHLIGHT-01`、`CODE-WRAP-01`、`CODE-REF-01`、`CODE-BLOCK-02`、`CODE-LANGUAGE-02` | [03-method.tex](../../examples/source/rc-low-pass-filter/sections/03-method.tex)、[05-discussion.tex](../../examples/source/rc-low-pass-filter/sections/05-discussion.tex) | 10、16–17 |
