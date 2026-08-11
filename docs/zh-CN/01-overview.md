@@ -8,7 +8,7 @@ LabReportTex 是一套用于日文实验报告的 LaTeX 模板，面向日本工
 
 项目同时维护中文和日文说明，并用一份虚构的 RC 低通滤波器报告展示模板源码与编译结果的对应关系。
 
-正常使用时不需要了解仓库的开发历史，也不需要 Git。项目公开发布后，请从最终公开仓库的 [Releases 页面](https://github.com/ywhdt/LabReportTex/releases) 下载干净模板 ZIP，解压后直接开始填写。仓库中的说明文档和完整示例不会放入该 ZIP，但可以继续在线查阅。
+正常使用时请从[Releases 页面](https://github.com/ywhdt/LabReportTex/releases) 下载干净模板 ZIP 使用。仓库中的说明文档和完整示例不会放入该 ZIP，但可以继续在线查阅。
 
 ## 适用对象
 
