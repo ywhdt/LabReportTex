@@ -2,7 +2,7 @@
 
 [项目首页](../../README.md) · [文档目录](README.md) · [日本語](../ja/09-math-and-cross-references.md)
 
-模板默认加载 `mathtools`、`amssymb`、`hyperref` 和 `cleveref`，因此普通公式、对齐推导、数学符号与带链接的交叉引用都不需要额外启用模块。本篇只说明模板已经采用的接口和编号策略，不展开这些宏包的全部功能。
+模板默认加载 `mathtools`、`amssymb`、`siunitx`、`hyperref` 和 `cleveref`，因此普通公式、对齐推导、数值与单位、数学符号与带链接的交叉引用都不需要额外启用模块。本篇只说明模板已经采用的接口和编号策略，不展开这些宏包的全部功能。
 
 ## 单个公式与多行推导
 
@@ -53,6 +53,48 @@
 ```
 
 `amssymb` 在示例中提供 `\mathbb`，例如 `s\in\mathbb{C}` 和 `f\in\mathbb{R}_{>0}`。该用例对应 [`MATH-AMSSYMB-01`](../../examples/FEATURES.md)，源码见[示例 02-theory.tex](../../examples/source/rc-low-pass-filter/sections/02-theory.tex)，效果见 PDF 第 3 页。
+
+## 数值与单位：`siunitx`
+
+模板默认加载 `siunitx` v3，使用宏包默认设置。在正文和公式中都可以用 `\qty{数值}{单位}`，由宏包统一处理单位的正体、前缀、科学计数法，以及数值与单位之间的间距：
+
+```tex
+抵抗は \qty{1.00}{\kilo\ohm}、静電容量は \qty{0.100}{\micro\farad} である。
+\begin{equation}
+  f_c=\qty{1.59e3}{\hertz}
+\end{equation}
+\num{1.59e3}       % 只排数值
+\unit{\hertz}      % 只排单位
+\ang{-45}          % 角度
+\qty{24}{\degreeCelsius}
+\qty{0.63}{\percent}
+```
+
+该用例对应 [`MATH-SIUNITX-01`](../../examples/FEATURES.md)，源码见[示例 02-theory.tex](../../examples/source/rc-low-pass-filter/sections/02-theory.tex)，效果见 [PDF 第 5 页](../../examples/compiled/rc-low-pass-filter.pdf)。`\qty` 可以直接用于正文，无需加 `$...$`。数值参数只写数字或 `1.59e3` 这样的指数输入，不要在其中手写 `\times10^3` 或单位。
+
+表格需要按小数点对齐时，可以使用 `S` 列。列标题中的文字和公式用花括号包住，数据格只放数值；`table-format=4.1` 为四位整数和一位小数预留宽度，不会自动四舍五入：
+
+```tex
+\begin{tabular}{S[table-format=4.1] S[table-format=1.3]}
+  \toprule
+  {$f$ / \unit{\hertz}} & {$V$ / \unit{\volt}} \\
+  \midrule
+  100.0 & 0.998 \\
+  1590.0 & 0.707 \\
+  \bottomrule
+\end{tabular}
+```
+
+完整示例的正文、公式、表头和坐标轴都使用 `siunitx`，表格中的数值用 `\num` 排版，角度用 `\ang`，角度列的表头用 `\unit{\degree}`。范围的连接符和共用单位在[示例 report.tex](../../examples/source/rc-low-pass-filter/report.tex) 中统一设置，因此正文可直接使用 `\qtyrange`：
+
+```tex
+\sisetup{range-phrase={--},range-units=single} % 放在导言区
+\qtyrange{1.49}{1.71}{\kilo\hertz}             % 放在正文
+```
+
+该范围显示为两个端点之间的短横线，并只在末尾显示一次单位。CSV 文件使用普通数值保存数据，单位在表头和坐标轴中标明。
+
+可选参数只作用于当前命令，例如 `\qty[per-mode=symbol]{2.0}{\metre\per\second}` 使用斜线显示复合单位。需要全局调整时，在导言区加载配置后使用 `\sisetup{...}`，不要再次加载 `siunitx`。
 
 ## 标签与 `\eqref`
 
@@ -171,6 +213,7 @@
 | 功能 | 稳定 ID | 源码 | PDF 页 |
 | --- | --- | --- | --- |
 | 单公式、对齐与常用数学能力 | `MATH-EQUATION-01`、`MATH-ALIGN-01`、`MATH-FREQUENCY-01`、`MATH-DCASES-01`、`MATH-COLONEQQ-01`、`MATH-AMSSYMB-01` | [02-theory.tex](../../examples/source/rc-low-pass-filter/sections/02-theory.tex) | 3–4 |
+| 数值、单位、范围与角度 | `MATH-SIUNITX-01` | [02-theory.tex](../../examples/source/rc-low-pass-filter/sections/02-theory.tex) | 5 |
 | 只给被引用公式编号 | `MATH-SHOWONLYREFS-01` | [02-theory.tex](../../examples/source/rc-low-pass-filter/sections/02-theory.tex) | 5 |
 | 普通、句首与对象名称 | `REF-SECTION-01`、`REF-NAME-01`、`REF-CAPITAL-01` | [01-purpose.tex](../../examples/source/rc-low-pass-filter/sections/01-purpose.tex)、[02-theory.tex](../../examples/source/rc-low-pass-filter/sections/02-theory.tex) | 3–4 |
 | 范围和句首范围 | `REF-RANGE-01`、`REF-RANGE-CAPITAL-01`、`REF-SUBFIG-RANGE-01` | [02-theory.tex](../../examples/source/rc-low-pass-filter/sections/02-theory.tex)、[03-method.tex](../../examples/source/rc-low-pass-filter/sections/03-method.tex) | 4–5、8 |

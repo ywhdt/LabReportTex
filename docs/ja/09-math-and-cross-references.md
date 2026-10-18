@@ -2,7 +2,7 @@
 
 [プロジェクトトップ](../../README.md) · [ドキュメント目次](README.md) · [中文](../zh-CN/09-math-and-cross-references.md)
 
-テンプレートは `mathtools`、`amssymb`、`hyperref`、`cleveref` を初期状態で読み込んでいます。一般的な数式、複数行の導出、数学記号、リンク付き相互参照のために、別のモジュールを有効にする必要はありません。このページでは、テンプレートが実際に採用しているインターフェースと番号付けの方針だけを説明します。
+テンプレートは `mathtools`、`amssymb`、`siunitx`、`hyperref`、`cleveref` を初期状態で読み込んでいます。一般的な数式、複数行の導出、数値と単位、数学記号、リンク付き相互参照のために、別のモジュールを有効にする必要はありません。このページでは、テンプレートが実際に採用しているインターフェースと番号付けの方針だけを説明します。
 
 ## 一つの数式と複数行の導出
 
@@ -53,6 +53,48 @@
 ```
 
 サンプルでは、`amssymb` の `\mathbb` を使い、`s\in\mathbb{C}` や `f\in\mathbb{R}_{>0}` と記述しています。この用例は [`MATH-AMSSYMB-01`](../../examples/FEATURES.md)、ソースは[サンプル 02-theory.tex](../../examples/source/rc-low-pass-filter/sections/02-theory.tex)、表示結果は PDF 第 3 ページです。
+
+## 数値と単位：`siunitx`
+
+テンプレートは `siunitx` v3 を初期設定のまま読み込みます。本文でも数式でも `\qty{数値}{単位}` を使えます。単位の立体表記、接頭辞、指数表記、数値と単位の間隔をパッケージが整えます。
+
+```tex
+抵抗は \qty{1.00}{\kilo\ohm}、静電容量は \qty{0.100}{\micro\farad} である。
+\begin{equation}
+  f_c=\qty{1.59e3}{\hertz}
+\end{equation}
+\num{1.59e3}       % 数値だけ
+\unit{\hertz}      % 単位だけ
+\ang{-45}          % 角度
+\qty{24}{\degreeCelsius}
+\qty{0.63}{\percent}
+```
+
+この用例は [`MATH-SIUNITX-01`](../../examples/FEATURES.md) に対応します。ソースは[サンプル 02-theory.tex](../../examples/source/rc-low-pass-filter/sections/02-theory.tex)、表示結果は [PDF 第 5 ページ](../../examples/compiled/rc-low-pass-filter.pdf)です。`\qty` は本文に直接書けるため、`$...$` で囲む必要はありません。数値の引数には数字や `1.59e3` のような指数形式を使い、`\times10^3` や単位を手書きしないでください。
+
+表の小数点位置をそろえるには `S` 列を使います。見出しの文字や数式は波括弧で囲み、データのセルには数値だけを入れます。`table-format=4.1` は整数 4 桁と小数 1 桁の幅を確保する指定で、自動的に丸めるものではありません。
+
+```tex
+\begin{tabular}{S[table-format=4.1] S[table-format=1.3]}
+  \toprule
+  {$f$ / \unit{\hertz}} & {$V$ / \unit{\volt}} \\
+  \midrule
+  100.0 & 0.998 \\
+  1590.0 & 0.707 \\
+  \bottomrule
+\end{tabular}
+```
+
+サンプルでは、本文、数式、表の見出し、軸ラベルに `siunitx` を使っています。表中の数値には `\num`、角度には `\ang`、角度の列見出しには `\unit{\degree}` を使います。範囲の区切りと単位の表示方法は[サンプル report.tex](../../examples/source/rc-low-pass-filter/report.tex)で設定しているため、本文では `\qtyrange` を直接使えます。
+
+```tex
+\sisetup{range-phrase={--},range-units=single} % プリアンブルに記述
+\qtyrange{1.49}{1.71}{\kilo\hertz}             % 本文に記述
+```
+
+この範囲は二つの端点をダッシュでつなぎ、単位を末尾に一度だけ表示します。CSV ファイルには通常の数値を保存し、単位は表の見出しと軸ラベルで示しています。
+
+オプション引数はその命令だけに適用されます。例えば `\qty[per-mode=symbol]{2.0}{\metre\per\second}` は、複合単位をスラッシュで表示します。全体の設定を変える場合は、プリアンブルで設定ファイルを読み込んだ後に `\sisetup{...}` を使い、`siunitx` を重ねて読み込まないでください。
 
 ## ラベルと `\eqref`
 
@@ -171,6 +213,7 @@
 | 機能 | 安定 ID | ソース | PDF ページ |
 | --- | --- | --- | --- |
 | 一つの数式、複数行の整列、一般的な数式機能 | `MATH-EQUATION-01`、`MATH-ALIGN-01`、`MATH-FREQUENCY-01`、`MATH-DCASES-01`、`MATH-COLONEQQ-01`、`MATH-AMSSYMB-01` | [02-theory.tex](../../examples/source/rc-low-pass-filter/sections/02-theory.tex) | 3～4 |
+| 数値・単位・範囲・角度 | `MATH-SIUNITX-01` | [02-theory.tex](../../examples/source/rc-low-pass-filter/sections/02-theory.tex) | 5 |
 | 参照した数式だけに番号を付ける | `MATH-SHOWONLYREFS-01` | [02-theory.tex](../../examples/source/rc-low-pass-filter/sections/02-theory.tex) | 5 |
 | 通常形式、文頭形式、対象名 | `REF-SECTION-01`、`REF-NAME-01`、`REF-CAPITAL-01` | [01-purpose.tex](../../examples/source/rc-low-pass-filter/sections/01-purpose.tex)、[02-theory.tex](../../examples/source/rc-low-pass-filter/sections/02-theory.tex) | 3～4 |
 | 範囲と文頭範囲 | `REF-RANGE-01`、`REF-RANGE-CAPITAL-01`、`REF-SUBFIG-RANGE-01` | [02-theory.tex](../../examples/source/rc-low-pass-filter/sections/02-theory.tex)、[03-method.tex](../../examples/source/rc-low-pass-filter/sections/03-method.tex) | 4～5、8 |

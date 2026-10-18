@@ -77,8 +77,8 @@ PNG、JPG、PDF の画像を `figures/` に置きます。ルートファイル�
     \toprule
     項目 & 条件 \\
     \midrule
-    入力波形 & 正弦波、振幅 $1.00\,\mathrm{V}$ \\
-    周波数 & $100\,\mathrm{Hz}$ から $10\,\mathrm{kHz}$ \\
+    入力波形 & 正弦波、振幅 \qty{1.00}{\volt} \\
+    周波数 & \qty{100}{\hertz} から \qty{10}{\kilo\hertz} \\
     \bottomrule
   \end{tabularx}
 \end{table}
@@ -99,8 +99,8 @@ PNG、JPG、PDF の画像を `figures/` に置きます。ルートファイル�
   領域 & 周波数 & 利得 \\
   \midrule
   \multirow{2}{*}{通過域}
-    & $100\,\mathrm{Hz}$ & $0.00\,\mathrm{dB}$ \\
-    & $500\,\mathrm{Hz}$ & $-0.35\,\mathrm{dB}$ \\
+    & \qty{100}{\hertz} & \qty{0.00}{\decibel} \\
+    & \qty{500}{\hertz} & \qty{-0.35}{\decibel} \\
   \bottomrule
 \end{tabular}
 ```
@@ -126,7 +126,7 @@ PNG、JPG、PDF の画像を `figures/` に置きます。ルートファイル�
 
 この用例は [`DIAG-CIRCUIT-01`](../../examples/FEATURES.md) に対応します。ソースは[サンプル 03-method.tex](../../examples/source/rc-low-pass-filter/sections/03-method.tex)、表示結果は PDF 第 8 ページです。
 
-一般的な装置接続図では、`tikzpicture` のノード、相対位置、矢印を使います。サンプルは `right=4mm of generator` で装置を並べ、`$(A)!0.5!(B)$` で中点を計算し、`mdframed` で装置図全体を囲みます。安定 ID は [`DIAG-APPARATUS-01`](../../examples/FEATURES.md)、[`DIAG-TIKZ-01`](../../examples/FEATURES.md)、[`DIAG-CALC-01`](../../examples/FEATURES.md)、[`DIAG-FRAME-01`](../../examples/FEATURES.md) です。すべて[サンプル 03-method.tex](../../examples/source/rc-low-pass-filter/sections/03-method.tex)にあり、表示結果は PDF 第 8 ページです。`circuits.logic.US` の AND ゲートは [`DIAG-LOGIC-01`](../../examples/FEATURES.md) に対応し、PDF 第 8 ページで確認できます。
+一般的な装置接続図では、`tikzpicture` のノード、相対位置、矢印を使います。サンプルは `right=4mm of generator` で装置を並べ、`$(A)!0.5!(B)$` で中点を計算し、`mdframed` で装置図全体を囲みます。安定 ID は [`DIAG-APPARATUS-01`](../../examples/FEATURES.md)、[`DIAG-TIKZ-01`](../../examples/FEATURES.md)、[`DIAG-CALC-01`](../../examples/FEATURES.md)、[`DIAG-FRAME-01`](../../examples/FEATURES.md) です。すべて[サンプル 03-method.tex](../../examples/source/rc-low-pass-filter/sections/03-method.tex)にあり、表示結果は PDF 第 8 ページです。`circuits.logic.US` の AND ゲートは [`DIAG-LOGIC-01`](../../examples/FEATURES.md) に対応し、PDF 第 8～9 ページで確認できます。
 
 サンプルの `device/.style` は、その `tikzpicture` 内だけで定義され、テンプレートの公開スタイルではありません。`diagrams.tex` は描画ツールを読み込むだけで、「装置図環境」は追加しません。色付きの説明と灰色のコード欄は、サンプル専用の `config/sample-guide.tex` で作成しており、テンプレートの機能ではありません。
 
@@ -186,8 +186,8 @@ with open("data.csv", encoding="utf-8") as stream:
     \begin{axis}[
       report axis,
       xmode=log,
-      xlabel={周波数 / Hz},
-      ylabel={利得 / dB}
+      xlabel={周波数 / \unit{\hertz}},
+      ylabel={利得 / \unit{\decibel}}
     ]
       \addplot[report plot,mark=*]
         table[x=frequency_hz,y=gain_measured,col sep=comma]
@@ -213,8 +213,8 @@ Release テンプレートには初期状態で `data/` ディレクトリがあ
     width=0.78\linewidth,
     height=0.48\linewidth,
     xmin=100, xmax=10000,
-    xlabel={周波数 / Hz},
-    ylabel={利得 / dB}
+    xlabel={周波数 / \unit{\hertz}},
+    ylabel={利得 / \unit{\decibel}}
   ]
     \addplot[report plot,mark=*]
       coordinates {(100,0) (1000,-1.4) (10000,-15.9)};
@@ -225,7 +225,7 @@ Release テンプレートには初期状態で `data/` ディレクトリがあ
     width=0.78\linewidth,
     height=0.48\linewidth,
     xmin=100, xmax=10000,
-    ylabel={位相差 / deg}
+    ylabel={位相差 / \unit{\degree}}
   ]
     \addplot[blue!60!black,mark=square*]
       coordinates {(100,-4) (1000,-33) (10000,-81)};
@@ -247,7 +247,7 @@ PGFPlots には多くの軸オプションがありますが、このプロジ�
 | 外部画像、画像ディレクトリ | `GRAPHICSPATH-01`、`FIG-IMAGE-01` | [report.tex](../../examples/source/rc-low-pass-filter/report.tex)、[03-method.tex](../../examples/source/rc-low-pass-filter/sections/03-method.tex) | 9 |
 | サブ図とフロート位置 | `FIG-SUBFIGURE-01`、`FLOAT-H-01` | [03-method.tex](../../examples/source/rc-low-pass-filter/sections/03-method.tex)、[04-results.tex](../../examples/source/rc-low-pass-filter/sections/04-results.tex)、[05-discussion.tex](../../examples/source/rc-low-pass-filter/sections/05-discussion.tex) | 7～9、11～15、17 |
 | 表 | `TABLE-TABULARX-01`、`TABLE-PCOLUMN-01`、`TABLE-BOOKTABS-01`、`TABLE-MULTIROW-01`、`TABLE-REPEAT-01` | [03-method.tex](../../examples/source/rc-low-pass-filter/sections/03-method.tex)、[04-results.tex](../../examples/source/rc-low-pass-filter/sections/04-results.tex) | 6～7、11～12 |
-| 回路図と装置図 | `DIAG-CIRCUIT-01`、`DIAG-APPARATUS-01`、`DIAG-TIKZ-01`、`DIAG-CALC-01`、`DIAG-FRAME-01`、`DIAG-LOGIC-01` | [03-method.tex](../../examples/source/rc-low-pass-filter/sections/03-method.tex) | 8 |
+| 回路図と装置図 | `DIAG-CIRCUIT-01`、`DIAG-APPARATUS-01`、`DIAG-TIKZ-01`、`DIAG-CALC-01`、`DIAG-FRAME-01`、`DIAG-LOGIC-01` | [03-method.tex](../../examples/source/rc-low-pass-filter/sections/03-method.tex) | 8～9 |
 | コードリスト | `CODE-INLINE-01`、`CODE-BLOCK-01`、`CODE-HIGHLIGHT-01`、`CODE-WRAP-01`、`CODE-REF-01`、`CODE-BLOCK-02`、`CODE-LANGUAGE-02` | [03-method.tex](../../examples/source/rc-low-pass-filter/sections/03-method.tex)、[05-discussion.tex](../../examples/source/rc-low-pass-filter/sections/05-discussion.tex) | 10、16～17 |
 | PGFPlots | `PLOT-DATAFILE-01`、`PLOT-SINGLE-01`、`PLOT-STYLE-AXIS-01`、`PLOT-STYLE-PLOT-01`、`PLOT-STYLE-LEGEND-01`、`PLOT-LOG-01`、`PLOT-DUAL-01`、`PLOT-STYLE-RIGHT-01`、`PLOT-BASE-01` | [04-results.tex](../../examples/source/rc-low-pass-filter/sections/04-results.tex) | 13～15 |
 

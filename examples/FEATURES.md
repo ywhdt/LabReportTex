@@ -80,6 +80,7 @@
 | `MATH-DCASES-01` | `mathtools` 的 `dcases` / 条件分岐した数式 | [02-theory.tex](source/rc-low-pass-filter/sections/02-theory.tex) | 4 |
 | `MATH-COLONEQQ-01` | `\coloneqq` 定义符号 / 定義を表す記号 | [02-theory.tex](source/rc-low-pass-filter/sections/02-theory.tex) | 4 |
 | `MATH-AMSSYMB-01` | `amssymb` 的 `\mathbb{C}`、`\mathbb{R}` / 数集合の記号 | [02-theory.tex](source/rc-low-pass-filter/sections/02-theory.tex) | 3 |
+| `MATH-SIUNITX-01` | `siunitx` 数值、单位、范围与角度 / 数値・単位・範囲・角度 | [02-theory.tex](source/rc-low-pass-filter/sections/02-theory.tex) | 5 |
 | `MATH-SHOWONLYREFS-01` | 被引用公式有编号、未引用公式无编号 / 参照された数式だけを番号付け | [02-theory.tex](source/rc-low-pass-filter/sections/02-theory.tex) | 5 |
 | `REF-SECTION-01` | `\cref` 引用章节 / 節の参照 | [01-purpose.tex](source/rc-low-pass-filter/sections/01-purpose.tex) | 3 |
 | `REF-NAME-01` | 自动输出“式、图、表、节、清单” / ラベル種別名の自動出力 | [02-theory.tex](source/rc-low-pass-filter/sections/02-theory.tex) | 4 |
@@ -108,7 +109,7 @@
 | `DIAG-CALC-01` | `calc` 计算两节点中点 / 二つのノードの中点計算 | [03-method.tex](source/rc-low-pass-filter/sections/03-method.tex) | 8 |
 | `DIAG-FRAME-01` | `mdframed` 作为实验装置外框 / 測定装置全体の枠線 | [03-method.tex](source/rc-low-pass-filter/sections/03-method.tex) | 8 |
 | `FIG-SUBFIGURE-01` | `subfigure` 子图与总图题 / 小図と全体の図題 | [03-method.tex](source/rc-low-pass-filter/sections/03-method.tex) | 8 |
-| `DIAG-LOGIC-01` | `circuits.logic.US` 的 AND 门 / 測定許可を表す AND ゲート | [03-method.tex](source/rc-low-pass-filter/sections/03-method.tex) | 8 |
+| `DIAG-LOGIC-01` | `circuits.logic.US` 的 AND 门 / 測定許可を表す AND ゲート | [03-method.tex](source/rc-low-pass-filter/sections/03-method.tex) | 8–9 |
 | `GRAPHICSPATH-01` | `\graphicspath` 图像目录 / 画像検索ディレクトリ | [report.tex](source/rc-low-pass-filter/report.tex) | 9 |
 | `FIG-IMAGE-01` | `graphicx` 的 `\includegraphics` / 外部 PNG の読み込み | [03-method.tex](source/rc-low-pass-filter/sections/03-method.tex), [oscilloscope-waveform.png](source/rc-low-pass-filter/figures/oscilloscope-waveform.png) | 9 |
 

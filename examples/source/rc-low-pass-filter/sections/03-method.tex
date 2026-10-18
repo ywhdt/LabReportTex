@@ -16,8 +16,8 @@
   \item オシロスコープ：Sample Scope B
   \item デジタルマルチメータ：Sample Meter C
   \item 10 倍受動プローブ：2 本
-  \item 金属皮膜抵抗：公称値 $1.00\,\mathrm{k}\Omega$
-  \item フィルムコンデンサ：公称値 $0.100\,\mu\mathrm{F}$
+  \item 金属皮膜抵抗：公称値 \qty{1.00}{\kilo\ohm}
+  \item フィルムコンデンサ：公称値 \qty{0.100}{\micro\farad}
   \item ブレッドボード、接続線、BNC 変換端子
 \end{list}
 
@@ -41,8 +41,8 @@ LaTeX の基本 \texttt{list} 環境では、第 1 引数にラベル、第 2 �
     機器 & 主な設定 & 本実験での用途 \\
     \midrule
     信号発生器
-      & 正弦波、$1.00\,\mathrm{V}$、出力抵抗 $50\,\Omega$
-      & 100 Hz から 10 kHz まで周波数を変化させ、RC 回路へ一定振幅の信号を入力する。\\
+      & 正弦波、\qty{1.00}{\volt}、出力抵抗 \qty{50}{\ohm}
+      & \qty{100}{\hertz} から \qty{10}{\kilo\hertz} まで周波数を変化させ、RC 回路へ一定振幅の信号を入力する。\\
     オシロスコープ
       & 2 チャンネル、AC 結合、時間差カーソル
       & 入力波形と出力波形を同時に表示し、振幅と二つの波形の時間差を読み取る。\\
@@ -50,7 +50,7 @@ LaTeX の基本 \texttt{list} 環境では、第 1 引数にラベル、第 2 �
       & 抵抗測定、容量測定
       & 回路を構成する前に抵抗値と静電容量を三回ずつ測定する。\\
     10 倍プローブ
-      & 入力容量 12 pF、入力抵抗 $10\,\mathrm{M}\Omega$
+      & 入力容量 \qty{12}{\pico\farad}、入力抵抗 \qty{10}{\mega\ohm}
       & 回路への負荷を小さくしながら、入力側と出力側の電圧を測定する。\\
     \bottomrule
   \end{tabularx}
@@ -94,16 +94,16 @@ LaTeX の基本 \texttt{list} 環境では、第 1 引数にラベル、第 2 �
     素子 & 1 回目 & 2 回目 & 3 回目 & 平均値 & 測定時の状態 \\
     \midrule
     抵抗
-      & $0.998\,\mathrm{k}\Omega$
-      & $0.999\,\mathrm{k}\Omega$
-      & $0.998\,\mathrm{k}\Omega$
-      & $0.998\,\mathrm{k}\Omega$
-      & 端子間を直接測定し、周囲温度は $24\,{}^{\circ}\mathrm{C}$ であった。\\
+      & \qty{0.998}{\kilo\ohm}
+      & \qty{0.999}{\kilo\ohm}
+      & \qty{0.998}{\kilo\ohm}
+      & \qty{0.998}{\kilo\ohm}
+      & 端子間を直接測定し、周囲温度は \qty{24}{\degreeCelsius} であった。\\
     コンデンサ
-      & $0.101\,\mu\mathrm{F}$
-      & $0.101\,\mu\mathrm{F}$
-      & $0.100\,\mu\mathrm{F}$
-      & $0.101\,\mu\mathrm{F}$
+      & \qty{0.101}{\micro\farad}
+      & \qty{0.101}{\micro\farad}
+      & \qty{0.100}{\micro\farad}
+      & \qty{0.101}{\micro\farad}
       & 測定前に端子を短絡して残留電荷を除いた。\\
     \bottomrule
   \end{tabularx}
@@ -245,9 +245,9 @@ CH2 の波形が安定していることの両方を確認した。
 \subsection{プローブ補償と波形確認}
 \label{subsec:probe-calibration}
 
-測定開始前に信号発生器とオシロスコープを 10 分間動作させた。
+測定開始前に信号発生器とオシロスコープを \qty{10}{\minute} 動作させた。
 プローブ倍率を両チャンネルとも 10 倍に設定し、校正端子の矩形波を用いて補償を調整した\cite{jp-incollection}。
-その後、$1.60\,\mathrm{kHz}$ の正弦波を入力し、遮断周波数付近で
+その後、\qty{1.60}{\kilo\hertz} の正弦波を入力し、遮断周波数付近で
 二つの波形が安定して表示されることを確認した。
 
 % [DOC:FIG-IMAGE-01] External image inserted with graphicx.
@@ -284,7 +284,7 @@ CH2 の波形が安定していることの両方を確認した。
 
 % [DOC:LIST-ITEMIZE-03] Measurement conditions.
 \begin{itemize}[leftmargin=3em,itemsep=0.25em]
-  \item 入力波形は正弦波とし、入力振幅は $1.00\,\mathrm{V}$ に保つ。
+  \item 入力波形は正弦波とし、入力振幅は \qty{1.00}{\volt} に保つ。
   \item 周波数は低い側から高い側へ変化させ、遮断周波数付近では測定間隔を小さくする。
   \item 各周波数で振幅と時間差を三回読み取る。
   \item 周波数変更後は波形が安定してから記録する。
@@ -303,11 +303,11 @@ CH2 の波形が安定していることの両方を確認した。
 \begin{enumerate}[label=(\arabic*),leftmargin=3em,itemsep=0.25em]
   \item 抵抗値と静電容量を三回測定し、平均値を求める。
   \item \cref{fig:rc-circuit}の回路を構成し、配線を目視確認する。
-  \item 信号発生器を正弦波、$100\,\mathrm{Hz}$、$1.00\,\mathrm{V}$ に設定する。
+  \item 信号発生器を正弦波、\qty{100}{\hertz}、\qty{1.00}{\volt} に設定する。
   \item CH1 と CH2 の零点、電圧軸および時間軸を調整する。
-  \item 100 Hz から 10 kHz まで周波数を変化させ、振幅と時間差を記録する。
-  \item 1.30--$2.00\,\mathrm{kHz}$ では測定点を追加する。
-  \item $2.00\,\mathrm{kHz}$ から 500 Hz まで逆方向にも測定し、走査方向の差を確認する。
+  \item \qty{100}{\hertz} から \qty{10}{\kilo\hertz} まで周波数を変化させ、振幅と時間差を記録する。
+  \item \qtyrange{1.30}{2.00}{\kilo\hertz} では測定点を追加する。
+  \item \qty{2.00}{\kilo\hertz} から \qty{500}{\hertz} まで逆方向にも測定し、走査方向の差を確認する。
   \item 測定終了後に入力を停止し、回路を取り外す。
 \end{enumerate}
 % guide_enumerate_end
@@ -329,12 +329,12 @@ CH2 の波形が安定していることの両方を確認した。
 
 % [DOC:LIST-DESCRIPTION-03] Description list for CSV fields.
 \begin{description}[leftmargin=12em,labelwidth=10.5em,nosep]
-  \item[\texttt{frequency\_hz}] 入力周波数
-  \item[\texttt{gain\_measured}] 測定した利得
-  \item[\texttt{gain\_theory}] 素子値から計算した利得
-  \item[\texttt{phase\_measured}] 測定した位相差
-  \item[\texttt{phase\_theory}] 理論式から計算した位相差
-  \item[\texttt{residual\_db}] 測定利得と理論利得の差
+  \item[\texttt{frequency\_hz}] 入力周波数（\unit{\hertz}）
+  \item[\texttt{gain\_measured}] 測定した利得（\unit{\decibel}）
+  \item[\texttt{gain\_theory}] 素子値から計算した利得（\unit{\decibel}）
+  \item[\texttt{phase\_measured}] 測定した位相差（\unit{\degree}）
+  \item[\texttt{phase\_theory}] 理論式から計算した位相差（\unit{\degree}）
+  \item[\texttt{residual\_db}] 測定利得と理論利得の差（\unit{\decibel}）
 \end{description}
 
 ファイル名は \lstinline|frequency-response.csv| とし、解析プログラムから同じ名前で読み込んだ。

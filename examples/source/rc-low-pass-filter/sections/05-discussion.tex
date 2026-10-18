@@ -71,7 +71,7 @@ print(message)
 \subsection{利得から求めた遮断周波数}
 \label{subsec:gain-cutoff}
 
-$-3\,\mathrm{dB}$ をはさむ 1.50 kHz と 1.60 kHz の二点を用い、
+\qty{-3}{\decibel} をはさむ \qty{1.50}{\kilo\hertz} と \qty{1.60}{\kilo\hertz} の二点を用い、
 利得を周波数に対して線形補間した。補間処理を\cref{lst:interpolation}に示す。
 
 % [DOC:CODE-BLOCK-02] A second Python listing.
@@ -93,17 +93,17 @@ cutoff_gain_hz = interpolate_x(
 print(f"gain estimate = {cutoff_gain_hz:.1f} Hz")
 \end{lstlisting}
 
-得られた遮断周波数は $1.57\,\mathrm{kHz}$ であった。
-測定点を一つ選ぶだけの場合は 1.60 kHz となるが、二点補間により理論値へ近い値が得られた。
+得られた遮断周波数は \qty{1.57}{\kilo\hertz} であった。
+測定点を一つ選ぶだけの場合は \qty{1.60}{\kilo\hertz} となるが、二点補間により理論値へ近い値が得られた。
 
 \subsection{位相差から求めた遮断周波数}
 \label{subsec:phase-cutoff}
 
-位相差が $-45\,\mathrm{deg}$ となる点についても、1.50 kHz の
-$-44\,\mathrm{deg}$ と 1.60 kHz の $-46\,\mathrm{deg}$ の間を補間した。
-この方法による遮断周波数は $1.55\,\mathrm{kHz}$ となった。
+位相差が \ang{-45} となる点についても、\qty{1.50}{\kilo\hertz} の
+\ang{-44} と \qty{1.60}{\kilo\hertz} の \ang{-46} の間を補間した。
+この方法による遮断周波数は \qty{1.55}{\kilo\hertz} となった。
 
-利得による推定値と位相差による推定値の差は 20 Hz であった。
+利得による推定値と位相差による推定値の差は \qty{20}{\hertz} であった。
 この差は、振幅と時間差を別々に読み取ったこと、および表示分解能が異なることにより生じたと考えられる。
 
 \subsection{曲線全体を用いた推定}
@@ -127,7 +127,7 @@ python3 analyze_response.py \
 \SampleGuideNote[red!65!black]{［CODE-LANGUAGE-02］}{%
 \texttt{language} の値を変更すると、同じ \texttt{lstlisting} で別の言語の構文を表示できます。}
 
-曲線全体から得られた遮断周波数は $1.58\,\mathrm{kHz}$ であった。
+曲線全体から得られた遮断周波数は \qty{1.58}{\kilo\hertz} であった。
 三つの推定結果を\cref{tab:cutoff-estimates}にまとめる。
 
 \begin{table}[H]
@@ -139,38 +139,38 @@ python3 analyze_response.py \
       >{\centering\arraybackslash}p{0.18\linewidth}
       >{\raggedright\arraybackslash}X}
     \toprule
-    推定方法 & 推定値 / kHz & 使用した情報 \\
+    推定方法 & 推定値 / \unit{\kilo\hertz} & 使用した情報 \\
     \midrule
-    利得の二点補間 & 1.57 & $-3\,\mathrm{dB}$ をはさむ 1.50 kHz と 1.60 kHz の測定値 \\
-    位相差の二点補間 & 1.55 & $-45\,\mathrm{deg}$ をはさむ二つの位相差 \\
-    利得曲線の当てはめ & 1.58 & 100 Hz から 10 kHz までの全利得測定値 \\
+    利得の二点補間 & \num{1.57} & \qty{-3}{\decibel} をはさむ \qty{1.50}{\kilo\hertz} と \qty{1.60}{\kilo\hertz} の測定値 \\
+    位相差の二点補間 & \num{1.55} & \ang{-45} をはさむ二つの位相差 \\
+    利得曲線の当てはめ & \num{1.58} & \qty{100}{\hertz} から \qty{10}{\kilo\hertz} までの全利得測定値 \\
     \bottomrule
   \end{tabularx}
 \end{table}
 
-三つの値は 1.55--1.58 kHz の範囲にあり、素子の測定値から求めた
-理論値 $1.58\,\mathrm{kHz}$ と近かった。
+三つの値は \qtyrange{1.55}{1.58}{\kilo\hertz} の範囲にあり、素子の測定値から求めた
+理論値 \qty{1.58}{\kilo\hertz} と近かった。
 
 \subsection{理論値との差}
 \label{subsec:relative-error}
 
-代表値として曲線当てはめによる $1.58\,\mathrm{kHz}$ を用い、
-公称値から求めた $1.59\,\mathrm{kHz}$ との相対差を\cref{eq:relative-error}で計算した。
+代表値として曲線当てはめによる \qty{1.58}{\kilo\hertz} を用い、
+公称値から求めた \qty{1.59}{\kilo\hertz} との相対差を\cref{eq:relative-error}で計算した。
 
 \begin{equation}
   \varepsilon
   =\frac{\lvert 1.58-1.59\rvert}{1.59}\times100
-  \simeq0.63\,\%
+  \simeq\qty{0.63}{\percent}
   \label{eq:relative-error}
 \end{equation}
 
-一方、実測した $R=0.998\,\mathrm{k}\Omega$、$C=0.101\,\mu\mathrm{F}$ を
-\cref{eq:cutoff}に代入した値は $1.58\,\mathrm{kHz}$ であり、曲線当てはめの値と一致した。
+一方、実測した $R=\qty{0.998}{\kilo\ohm}$、$C=\qty{0.101}{\micro\farad}$ を
+\cref{eq:cutoff}に代入した値は \qty{1.58}{\kilo\hertz} であり、曲線当てはめの値と一致した。
 
 \subsection{素子公差の影響}
 \label{subsec:tolerance-discussion}
 
-\crefrange{eq:cutoff-min}{eq:cutoff-max}で求めた 1.49--1.71 kHz の範囲には、
+\crefrange{eq:cutoff-min}{eq:cutoff-max}で求めた \qtyrange{1.49}{1.71}{\kilo\hertz} の範囲には、
 三つの推定値がすべて含まれる。一次近似では、遮断周波数の相対変化は
 抵抗と静電容量の相対変化の和に対応する。
 
@@ -192,19 +192,19 @@ python3 analyze_response.py \
 \label{subsec:instrument-loading}
 
 理論式では信号発生器を理想電圧源、オシロスコープを無限大の入力抵抗として扱った。
-実際には信号発生器に $50\,\Omega$ の出力抵抗があり、プローブにも入力抵抗と入力容量がある。
+実際には信号発生器に \qty{50}{\ohm} の出力抵抗があり、プローブにも入力抵抗と入力容量がある。
 そのため、回路から見た実効抵抗と実効容量は公称値だけで決まらない。
 
 特に高周波側ではプローブの入力容量がコンデンサと並列に加わり、
 理論曲線よりわずかに大きな減衰を生じる可能性がある。
-\cref{fig:gain-residual}で 10 kHz の残差が正側へずれたことには、
+\cref{fig:gain-residual}で \qty{10}{\kilo\hertz} の残差が正側へずれたことには、
 振幅読取りの分解能や信号発生器の出力変化も影響したと考えられる。
 
 \subsection{走査方向と再現性}
 \label{subsec:sweep-direction}
 
-500 Hz から 2.00 kHz までを逆方向にも測定した結果、同じ周波数での利得差は
-最大 $0.04\,\mathrm{dB}$ であった。RC 回路は受動回路であり、今回の時間間隔では
+\qty{500}{\hertz} から \qty{2.00}{\kilo\hertz} までを逆方向にも測定した結果、同じ周波数での利得差は
+最大 \qty{0.04}{\decibel} であった。RC 回路は受動回路であり、今回の時間間隔では
 明確な履歴依存性は見られなかった。
 
 ただし、周波数を切り替えた直後に値を読み取ると、オシロスコープの自動測定値が
@@ -219,8 +219,8 @@ python3 analyze_response.py \
 % [DOC:LIST-DESCRIPTION-04] Description list for error sources.
 \begin{description}[leftmargin=10em,labelwidth=8.5em,itemsep=0.25em]
   \item[素子の公差] 抵抗値と静電容量が公称値からずれる。
-  \item[周波数間隔] 真の $-3\,\mathrm{dB}$ 点を直接測定せず、測定点間を補間している。
-  \item[出力抵抗] 信号発生器の $50\,\Omega$ を単純な理論式に含めていない。
+  \item[周波数間隔] 真の \qty{-3}{\decibel} 点を直接測定せず、測定点間を補間している。
+  \item[出力抵抗] 信号発生器の \qty{50}{\ohm} を単純な理論式に含めていない。
   \item[プローブ負荷] プローブの入力抵抗と入力容量が回路へ加わる。
   \item[時間差読取り] カーソル位置の分解能が位相差へ変換される。
   \item[振幅読取り] 高周波側では出力振幅が小さく、相対的な読取り誤差が増える。
@@ -237,7 +237,7 @@ python3 analyze_response.py \
 
 % [DOC:LIST-ENUMERATE-02] A second enumerate example.
 \begin{enumerate}[label=\arabic*.,leftmargin=3em,itemsep=0.35em]
-  \item 1.45--1.70 kHz の測定間隔を 25 Hz 程度まで小さくする。
+  \item \qtyrange{1.45}{1.70}{\kilo\hertz} の測定間隔を \qty{25}{\hertz} 程度まで小さくする。
   \item 各周波数で五回以上測定し、平均値と標準不確かさを求める。
   \item 信号発生器の出力抵抗を含む等価回路で理論値を計算する。
   \item プローブの入力容量を実測または仕様値から補正する。

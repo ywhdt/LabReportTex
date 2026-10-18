@@ -19,6 +19,8 @@
 
 公式编号采用 `showonlyrefs`，可以照常使用 `\cref`、`\Cref` 及其星号和范围形式。TikZ、电路图、代码清单和 PGFPlots 等功能可在 `config/preamble.tex` 中按需启用。
 
+模板已默认加载 `siunitx` v3，可用 `\qty{1.00}{\kilo\ohm}`、`\num{1.59e3}` 和 `\unit{\hertz}` 统一排版数值与单位，无需手动插入数值与单位之间的空白。
+
 完整说明请访问 [LabReportTex 项目仓库](https://github.com/ywhdt/LabReportTex)。
 本模板采用 [MIT License](LICENSE)。
 
@@ -38,6 +40,8 @@
 コンパイルには LuaLaTeX、Latexmk、Biber が必要です。`\DocumentMetadata` により，`enumitem` を直接読み込まず TeX Live 2026 の新しいリストキーを有効にしています。レポート名と作成者は PDF メタデータにも保存されますが，タグ付き PDF は生成しません。
 
 数式番号には `showonlyrefs` を使い，`\cref`、`\Cref` と各コマンドのスター付き・範囲指定形式をそのまま利用できます。TikZ、回路図、ソースコード、PGFPlots などは `config/preamble.tex` から必要な機能だけを有効にしてください。
+
+数値と単位には、初期状態で読み込まれる `siunitx` v3 を使えます。例は `\qty{1.00}{\kilo\ohm}`、`\num{1.59e3}`、`\unit{\hertz}` です。パッケージの追加読み込みや、数値と単位の間の空白指定は不要です。
 
 詳しい説明は [LabReportTex プロジェクト](https://github.com/ywhdt/LabReportTex)を参照してください。
 本テンプレートは [MIT License](LICENSE) で公開されています。

@@ -32,6 +32,8 @@ biber --version
 
 `biblatex-jareport.sty` 和 `biblatex-jareport-japanese.lbx` 是 Release ZIP 自带的本地参考文献样式文件，不是需要另外安装的同名 TeX Live 宏包。如果其中之一缺失，应从原 ZIP 恢复，并保持它们与 `report.tex` 位于同一层目录。
 
+数值与单位排版使用 `siunitx` v3，默认已加载。精简安装若提示找不到 `siunitx.sty`，请通过 TeX Live 包管理工具安装 `siunitx`；基本用法见[公式与交叉引用](09-math-and-cross-references.md)。
+
 可选模块默认处于关闭状态：
 
 ```tex

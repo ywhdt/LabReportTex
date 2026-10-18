@@ -77,8 +77,8 @@
     \toprule
     項目 & 条件 \\
     \midrule
-    入力波形 & 正弦波、振幅 $1.00\,\mathrm{V}$ \\
-    周波数 & $100\,\mathrm{Hz}$ から $10\,\mathrm{kHz}$ \\
+    入力波形 & 正弦波、振幅 \qty{1.00}{\volt} \\
+    周波数 & \qty{100}{\hertz} から \qty{10}{\kilo\hertz} \\
     \bottomrule
   \end{tabularx}
 \end{table}
@@ -99,8 +99,8 @@
   領域 & 周波数 & 利得 \\
   \midrule
   \multirow{2}{*}{通過域}
-    & $100\,\mathrm{Hz}$ & $0.00\,\mathrm{dB}$ \\
-    & $500\,\mathrm{Hz}$ & $-0.35\,\mathrm{dB}$ \\
+    & \qty{100}{\hertz} & \qty{0.00}{\decibel} \\
+    & \qty{500}{\hertz} & \qty{-0.35}{\decibel} \\
   \bottomrule
 \end{tabular}
 ```
@@ -126,7 +126,7 @@
 
 该用例对应 [`DIAG-CIRCUIT-01`](../../examples/FEATURES.md)，源码见[示例 03-method.tex](../../examples/source/rc-low-pass-filter/sections/03-method.tex)，效果见 PDF 第 8 页。
 
-普通装置连接图使用 `tikzpicture` 中的节点、相对位置和箭头。示例以 `right=4mm of generator` 排列设备，用 `$(A)!0.5!(B)$` 计算中点，并用 `mdframed` 给整幅装置图加框。稳定 ID 分别为 [`DIAG-APPARATUS-01`](../../examples/FEATURES.md)、[`DIAG-TIKZ-01`](../../examples/FEATURES.md)、[`DIAG-CALC-01`](../../examples/FEATURES.md) 和 [`DIAG-FRAME-01`](../../examples/FEATURES.md)，全部位于[示例 03-method.tex](../../examples/source/rc-low-pass-filter/sections/03-method.tex)，效果见 PDF 第 8 页。`circuits.logic.US` 的 AND 门用例为 [`DIAG-LOGIC-01`](../../examples/FEATURES.md)，效果见 PDF 第 8 页。
+普通装置连接图使用 `tikzpicture` 中的节点、相对位置和箭头。示例以 `right=4mm of generator` 排列设备，用 `$(A)!0.5!(B)$` 计算中点，并用 `mdframed` 给整幅装置图加框。稳定 ID 分别为 [`DIAG-APPARATUS-01`](../../examples/FEATURES.md)、[`DIAG-TIKZ-01`](../../examples/FEATURES.md)、[`DIAG-CALC-01`](../../examples/FEATURES.md) 和 [`DIAG-FRAME-01`](../../examples/FEATURES.md)，全部位于[示例 03-method.tex](../../examples/source/rc-low-pass-filter/sections/03-method.tex)，效果见 PDF 第 8 页。`circuits.logic.US` 的 AND 门用例为 [`DIAG-LOGIC-01`](../../examples/FEATURES.md)，效果见 PDF 第 8–9 页。
 
 示例中的 `device/.style` 只在该 `tikzpicture` 内定义，并不是模板公开样式。`diagrams.tex` 只加载绘图工具，没有新增“装置图环境”。彩色说明与灰色源码框来自示例专用的 `config/sample-guide.tex`，也不属于模板功能。
 
@@ -186,8 +186,8 @@ with open("data.csv", encoding="utf-8") as stream:
     \begin{axis}[
       report axis,
       xmode=log,
-      xlabel={周波数 / Hz},
-      ylabel={利得 / dB}
+      xlabel={周波数 / \unit{\hertz}},
+      ylabel={利得 / \unit{\decibel}}
     ]
       \addplot[report plot,mark=*]
         table[x=frequency_hz,y=gain_measured,col sep=comma]
@@ -213,8 +213,8 @@ Release 模板默认没有 `data/` 目录；采用这个路径时需要自行创
     width=0.78\linewidth,
     height=0.48\linewidth,
     xmin=100, xmax=10000,
-    xlabel={周波数 / Hz},
-    ylabel={利得 / dB}
+    xlabel={周波数 / \unit{\hertz}},
+    ylabel={利得 / \unit{\decibel}}
   ]
     \addplot[report plot,mark=*]
       coordinates {(100,0) (1000,-1.4) (10000,-15.9)};
@@ -225,7 +225,7 @@ Release 模板默认没有 `data/` 目录；采用这个路径时需要自行创
     width=0.78\linewidth,
     height=0.48\linewidth,
     xmin=100, xmax=10000,
-    ylabel={位相差 / deg}
+    ylabel={位相差 / \unit{\degree}}
   ]
     \addplot[blue!60!black,mark=square*]
       coordinates {(100,-4) (1000,-33) (10000,-81)};
@@ -247,7 +247,7 @@ PGFPlots 的轴选项很多，本项目只把上面五个样式作为模板公�
 | 外部图片、图片目录 | `GRAPHICSPATH-01`、`FIG-IMAGE-01` | [report.tex](../../examples/source/rc-low-pass-filter/report.tex)、[03-method.tex](../../examples/source/rc-low-pass-filter/sections/03-method.tex) | 9 |
 | 子图与浮动位置 | `FIG-SUBFIGURE-01`、`FLOAT-H-01` | [03-method.tex](../../examples/source/rc-low-pass-filter/sections/03-method.tex)、[04-results.tex](../../examples/source/rc-low-pass-filter/sections/04-results.tex)、[05-discussion.tex](../../examples/source/rc-low-pass-filter/sections/05-discussion.tex) | 7–9、11–15、17 |
 | 表格 | `TABLE-TABULARX-01`、`TABLE-PCOLUMN-01`、`TABLE-BOOKTABS-01`、`TABLE-MULTIROW-01`、`TABLE-REPEAT-01` | [03-method.tex](../../examples/source/rc-low-pass-filter/sections/03-method.tex)、[04-results.tex](../../examples/source/rc-low-pass-filter/sections/04-results.tex) | 6–7、11–12 |
-| 回路与装置图 | `DIAG-CIRCUIT-01`、`DIAG-APPARATUS-01`、`DIAG-TIKZ-01`、`DIAG-CALC-01`、`DIAG-FRAME-01`、`DIAG-LOGIC-01` | [03-method.tex](../../examples/source/rc-low-pass-filter/sections/03-method.tex) | 8 |
+| 回路与装置图 | `DIAG-CIRCUIT-01`、`DIAG-APPARATUS-01`、`DIAG-TIKZ-01`、`DIAG-CALC-01`、`DIAG-FRAME-01`、`DIAG-LOGIC-01` | [03-method.tex](../../examples/source/rc-low-pass-filter/sections/03-method.tex) | 8–9 |
 | 代码清单 | `CODE-INLINE-01`、`CODE-BLOCK-01`、`CODE-HIGHLIGHT-01`、`CODE-WRAP-01`、`CODE-REF-01`、`CODE-BLOCK-02`、`CODE-LANGUAGE-02` | [03-method.tex](../../examples/source/rc-low-pass-filter/sections/03-method.tex)、[05-discussion.tex](../../examples/source/rc-low-pass-filter/sections/05-discussion.tex) | 10、16–17 |
 | PGFPlots | `PLOT-DATAFILE-01`、`PLOT-SINGLE-01`、`PLOT-STYLE-AXIS-01`、`PLOT-STYLE-PLOT-01`、`PLOT-STYLE-LEGEND-01`、`PLOT-LOG-01`、`PLOT-DUAL-01`、`PLOT-STYLE-RIGHT-01`、`PLOT-BASE-01` | [04-results.tex](../../examples/source/rc-low-pass-filter/sections/04-results.tex) | 13–15 |
 

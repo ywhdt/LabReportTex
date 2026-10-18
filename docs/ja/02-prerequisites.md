@@ -32,6 +32,8 @@ biber --version
 
 `biblatex-jareport.sty` と `biblatex-jareport-japanese.lbx` は Release ZIP に含まれるローカルの参考文献スタイルファイルであり、同名の TeX Live パッケージを別途導入するものではありません。どちらかがない場合は元の ZIP から復元し、`report.tex` と同じ階層に置いてください。
 
+数値と単位には、初期状態で読み込まれる `siunitx` v3 を使います。最小構成の環境で `siunitx.sty` が見つからない場合は、TeX Live のパッケージ管理ツールで `siunitx` を導入してください。基本的な使い方は[数式と相互参照](09-math-and-cross-references.md)を参照してください。
+
 オプションモジュールは初期状態では無効です。
 
 ```tex

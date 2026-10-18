@@ -7,7 +7,7 @@
 
 各周波数で得られた入力振幅、出力振幅、利得および位相差を
 \cref{tab:frequency-response}に示す。入力振幅は全測定点で
-$1.00\,\mathrm{V}$ に調整した。
+\qty{1.00}{\volt} に調整した。
 
 % [DOC:TABLE-MULTIROW-01] Frequency bands grouped by multirow.
 % guide_multirow_table_start
@@ -25,28 +25,28 @@ $1.00\,\mathrm{V}$ に調整した。
       >{\centering\arraybackslash}p{0.13\linewidth}
       >{\centering\arraybackslash}X}
     \toprule
-    領域 & 周波数 / Hz & 入力 / V & 出力 / V & 利得 / dB & 位相差 / deg \\
+    領域 & 周波数 / \unit{\hertz} & 入力 / \unit{\volt} & 出力 / \unit{\volt} & 利得 / \unit{\decibel} & 位相差 / \unit{\degree} \\
     \midrule
     \multirow{5}{*}{通過域}
-      & 100  & 1.00 & 1.00 & $0.00$  & $-4$ \\
-      & 200  & 1.00 & 0.99 & $-0.09$ & $-7$ \\
-      & 300  & 1.00 & 0.98 & $-0.17$ & $-11$ \\
-      & 500  & 1.00 & 0.96 & $-0.35$ & $-18$ \\
-      & 700  & 1.00 & 0.92 & $-0.73$ & $-24$ \\
+      & \num{100}  & \num{1.00} & \num{1.00} & \num{0.00}  & \num{-4} \\
+      & \num{200}  & \num{1.00} & \num{0.99} & \num{-0.09} & \num{-7} \\
+      & \num{300}  & \num{1.00} & \num{0.98} & \num{-0.17} & \num{-11} \\
+      & \num{500}  & \num{1.00} & \num{0.96} & \num{-0.35} & \num{-18} \\
+      & \num{700}  & \num{1.00} & \num{0.92} & \num{-0.73} & \num{-24} \\
     \midrule
     \multirow{6}{*}{遷移域}
-      & 1000 & 1.00 & 0.85 & $-1.41$ & $-33$ \\
-      & 1300 & 1.00 & 0.78 & $-2.20$ & $-40$ \\
-      & 1500 & 1.00 & 0.73 & $-2.78$ & $-44$ \\
-      & 1600 & 1.00 & 0.70 & $-3.10$ & $-46$ \\
-      & 1800 & 1.00 & 0.66 & $-3.61$ & $-49$ \\
-      & 2000 & 1.00 & 0.62 & $-4.15$ & $-52$ \\
+      & \num{1000} & \num{1.00} & \num{0.85} & \num{-1.41} & \num{-33} \\
+      & \num{1300} & \num{1.00} & \num{0.78} & \num{-2.20} & \num{-40} \\
+      & \num{1500} & \num{1.00} & \num{0.73} & \num{-2.78} & \num{-44} \\
+      & \num{1600} & \num{1.00} & \num{0.70} & \num{-3.10} & \num{-46} \\
+      & \num{1800} & \num{1.00} & \num{0.66} & \num{-3.61} & \num{-49} \\
+      & \num{2000} & \num{1.00} & \num{0.62} & \num{-4.15} & \num{-52} \\
     \midrule
     \multirow{4}{*}{減衰域}
-      & 3000  & 1.00 & 0.46 & $-6.70$  & $-62$ \\
-      & 5000  & 1.00 & 0.30 & $-10.46$ & $-73$ \\
-      & 7000  & 1.00 & 0.22 & $-13.05$ & $-77$ \\
-      & 10000 & 1.00 & 0.16 & $-15.92$ & $-81$ \\
+      & \num{3000}  & \num{1.00} & \num{0.46} & \num{-6.70}  & \num{-62} \\
+      & \num{5000}  & \num{1.00} & \num{0.30} & \num{-10.46} & \num{-73} \\
+      & \num{7000}  & \num{1.00} & \num{0.22} & \num{-13.05} & \num{-77} \\
+      & \num{10000} & \num{1.00} & \num{0.16} & \num{-15.92} & \num{-81} \\
     \bottomrule
   \end{tabularx}
 \end{table}
@@ -65,10 +65,10 @@ $1.00\,\mathrm{V}$ に調整した。
 \SampleGuideNote[orange!80!black]{表の幅に関する補足}{%
 数値列には固定幅の \texttt{p} 列、最後の列には残り幅を使う \texttt{X} 列を組み合わせています。}
 
-100--700 Hz では出力振幅が入力振幅に近く、利得の低下は
-$1\,\mathrm{dB}$ 未満であった。1.30--2.00 kHz では利得と位相差が大きく変化し、
-1.60 kHz で利得 $-3.10\,\mathrm{dB}$、位相差 $-46\,\mathrm{deg}$ を得た。
-5 kHz 以上では出力振幅が明確に小さくなった。
+\qtyrange{100}{700}{\hertz} では出力振幅が入力振幅に近く、利得の低下は
+\qty{1}{\decibel} 未満であった。\qtyrange{1.30}{2.00}{\kilo\hertz} では利得と位相差が大きく変化し、
+\qty{1.60}{\kilo\hertz} で利得 \qty{-3.10}{\decibel}、位相差 \ang{-46} を得た。
+\qty{5}{\kilo\hertz} 以上では出力振幅が明確に小さくなった。
 
 \subsection{遮断周波数付近の繰り返し測定}
 \label{subsec:repeatability}
@@ -83,13 +83,13 @@ $1\,\mathrm{dB}$ 未満であった。1.30--2.00 kHz では利得と位相差が
   \label{tab:repeatability}
   \begin{tabular}{rrrrrr}
     \toprule
-    周波数 / Hz & 1 回目 / dB & 2 回目 / dB & 3 回目 / dB & 平均 / dB & 標準偏差 / dB \\
+    周波数 / \unit{\hertz} & 1 回目 / \unit{\decibel} & 2 回目 / \unit{\decibel} & 3 回目 / \unit{\decibel} & 平均 / \unit{\decibel} & 標準偏差 / \unit{\decibel} \\
     \midrule
-    1300 & $-2.18$ & $-2.22$ & $-2.20$ & $-2.20$ & 0.02 \\
-    1500 & $-2.75$ & $-2.80$ & $-2.79$ & $-2.78$ & 0.03 \\
-    1600 & $-3.08$ & $-3.12$ & $-3.10$ & $-3.10$ & 0.02 \\
-    1800 & $-3.58$ & $-3.63$ & $-3.62$ & $-3.61$ & 0.03 \\
-    2000 & $-4.12$ & $-4.18$ & $-4.15$ & $-4.15$ & 0.03 \\
+    \num{1300} & \num{-2.18} & \num{-2.22} & \num{-2.20} & \num{-2.20} & \num{0.02} \\
+    \num{1500} & \num{-2.75} & \num{-2.80} & \num{-2.79} & \num{-2.78} & \num{0.03} \\
+    \num{1600} & \num{-3.08} & \num{-3.12} & \num{-3.10} & \num{-3.10} & \num{0.02} \\
+    \num{1800} & \num{-3.58} & \num{-3.63} & \num{-3.62} & \num{-3.61} & \num{0.03} \\
+    \num{2000} & \num{-4.12} & \num{-4.18} & \num{-4.15} & \num{-4.15} & \num{0.03} \\
     \bottomrule
   \end{tabular}
 \end{table}
@@ -97,7 +97,7 @@ $1\,\mathrm{dB}$ 未満であった。1.30--2.00 kHz では利得と位相差が
 \SampleGuideNote[orange!80!black]{［TABLE-REPEAT-01］}{%
 単純な数値の比較では標準の \texttt{tabular} も使用できます。ここでは列を右寄せして桁を比較しやすくしています。}
 
-三回の測定値の標準偏差は $0.02$--$0.03\,\mathrm{dB}$ であり、
+三回の測定値の標準偏差は \qtyrange{0.02}{0.03}{\decibel} であり、
 同じ条件での短時間の繰り返しに対しては大きなばらつきは見られなかった。
 
 \subsection{単一縦軸の利得特性}
@@ -124,10 +124,10 @@ $1\,\mathrm{dB}$ 未満であった。1.30--2.00 kHz では利得と位相差が
       ymin=-18,
       ymax=1,
       xtick={100,1000,10000},
-      xticklabels={$10^2$,$10^3$,$10^4$},
+      xticklabels={\num{1e2},\num{1e3},\num{1e4}},
       ytick={-15,-10,-5,0},
-      xlabel={周波数 / Hz},
-      ylabel={利得 / dB}
+      xlabel={周波数 / \unit{\hertz}},
+      ylabel={利得 / \unit{\decibel}}
     ]
       \addplot[report plot,mark=*]
         table[x=frequency_hz,y=gain_measured,col sep=comma]
@@ -170,7 +170,7 @@ $1\,\mathrm{dB}$ 未満であった。1.30--2.00 kHz では利得と位相差が
 
 % [DOC:PLOT-LOG-01] Logarithmic frequency axis.
 \SampleGuideNote[orange!80!black]{対数軸の補足}{%
-周波数軸には \texttt{xmode=log} を指定し、100 Hz、1 kHz、10 kHz を等間隔に表示しています。}
+周波数軸には \texttt{xmode=log} を指定し、\qty{100}{\hertz}、\qty{1}{\kilo\hertz}、\qty{10}{\kilo\hertz} を等間隔に表示しています。}
 
 測定値は全周波数範囲で理論曲線に沿って変化した。
 特に遮断周波数付近では、測定点を増やしたことにより曲線の変化を細かく確認できた。
@@ -195,10 +195,10 @@ $1\,\mathrm{dB}$ 未満であった。1.30--2.00 kHz では利得と位相差が
       ymin=-18,
       ymax=1,
       xtick={100,1000,10000},
-      xticklabels={$10^2$,$10^3$,$10^4$},
+      xticklabels={\num{1e2},\num{1e3},\num{1e4}},
       ytick={-15,-10,-5,0},
-      xlabel={周波数 / Hz},
-      ylabel={利得 / dB},
+      xlabel={周波数 / \unit{\hertz}},
+      ylabel={利得 / \unit{\decibel}},
       legend style={at={(0.03,0.04)},anchor=south west}
     ]
       \addplot[report plot,mark=*]
@@ -223,7 +223,7 @@ $1\,\mathrm{dB}$ 未満であった。1.30--2.00 kHz では利得と位相差が
       ymin=-90,
       ymax=0,
       ytick={-90,-60,-30,0},
-      ylabel={位相差 / deg},
+      ylabel={位相差 / \unit{\degree}},
       legend style={at={(0.97,0.96)},anchor=north east}
     ]
       \addplot[blue!60!black,line width=1.2pt,mark=square*,mark size=2.1pt]
@@ -259,7 +259,7 @@ $1\,\mathrm{dB}$ 未満であった。1.30--2.00 kHz では利得と位相差が
 二つの軸で幅、高さ、横軸範囲を同じ値にすると、目盛位置が正確に一致します。}
 
 \Crefrange{fig:gain-response}{fig:dual-response}から、利得と位相差のどちらを用いても
-遮断周波数が 1.6 kHz 付近にあることを確認できる。
+遮断周波数が \qty{1.6}{\kilo\hertz} 付近にあることを確認できる。
 
 \subsection{利得残差}
 \label{subsec:residuals}
@@ -280,10 +280,10 @@ $1\,\mathrm{dB}$ 未満であった。1.30--2.00 kHz では利得と位相差が
       ymin=-0.20,
       ymax=0.20,
       xtick={100,1000,10000},
-      xticklabels={$10^2$,$10^3$,$10^4$},
+      xticklabels={\num{1e2},\num{1e3},\num{1e4}},
       ytick={-0.2,-0.1,0,0.1,0.2},
-      xlabel={周波数 / Hz},
-      ylabel={利得残差 / dB}
+      xlabel={周波数 / \unit{\hertz}},
+      ylabel={利得残差 / \unit{\decibel}}
     ]
       \addplot[report plot,only marks,mark=*]
         table[x=frequency_hz,y=residual_db,col sep=comma]
@@ -299,7 +299,7 @@ $1\,\mathrm{dB}$ 未満であった。1.30--2.00 kHz では利得と位相差が
 \SampleGuideNote[orange!80!black]{［PLOT-BASE-01］}{%
 凡例を必要としないグラフでは、軸の基本書式だけを持つ \texttt{report axis base} を直接利用できます。}
 
-残差は $-0.10$--$0.15\,\mathrm{dB}$ の範囲にあり、特定の周波数だけが
+残差は \qtyrange{-0.10}{0.15}{\decibel} の範囲にあり、特定の周波数だけが
 大きく外れる傾向は見られなかった。
 \cref{tab:frequency-response,tab:repeatability,fig:gain-residual}を合わせると、
 測定値のばらつきよりも周波数ごとのわずかな系統差が残っていることが分かる。
